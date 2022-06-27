@@ -1,0 +1,25 @@
+@charset "UTF-8";
+footer{
+	width : 75%;
+	margin : 0 auto;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	background-color : #B4C6A6;
+}
+footer ul{
+	width : 80%;
+	margin : 0px auto;
+	padding : 20px 0 20px 20px;
+}
+footer ul li{
+	list-style : none;
+	color : white;
+}
+footer ul li a{
+	text-decoration : none;
+	color : white;
+}
+footer ul li a:hover{
+	color : #FFC286;
+	font-weight: 400;
+}

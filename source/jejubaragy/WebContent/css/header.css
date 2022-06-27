@@ -1,0 +1,50 @@
+@charset "UTF-8";
+header{
+	width : 75%;
+	margin : 0 auto;
+	overflow : hidden;
+	font-family: 'Hi Melody', cursive;
+}
+header #nav{
+	width : 100%;
+}
+header #nav .left li{
+	float : left;
+}
+header #nav .left li a{
+	font-size : 28px;
+}
+header #nav .left li .logo{
+	width : 200px;
+	height : 65px;
+	line-height : 65px;
+	font-size : 40px;
+	text-align : center;
+	font-weight: bold;
+	color : #FFC286;
+}
+header #nav .left li .logo br{
+	width : 0px;
+}
+header #nav .right li{
+	float : right;
+}
+header #nav ul.right li a{
+	width : 80px;
+	font-size : 20px;
+}
+#nav ul li{
+	list-style : none;
+}
+#nav ul li a{
+	width : 100px;
+	line-height : 65px;
+	text-align : center;
+	text-decoration : none;
+	font-weight: bold;
+	display : block;
+	color : #B4C6A6;
+}
+#nav ul li a:hover{
+	color : #66806A;
+}
