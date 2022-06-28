@@ -40,5 +40,4 @@ public class AdminDto {
 		return "AdminDto [aid=" + aid + ", apw=" + apw + ", aname=" + aname + "]";
 	}
 	
-	
 }

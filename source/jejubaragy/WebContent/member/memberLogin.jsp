@@ -7,27 +7,33 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>관리자 로그인 페이지</title>
+	<title>회원 로그인 페이지</title>
+	<c:if test="${not empty admin || not empty member }">
+		<script>
+			location.href="${conPath}/main.do";
+		</script>
+	</c:if>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 		<div class="login">
-			<form action="${conPath }/adminLogin.do" method="post">
+			<form action="${conPath }/memberLogin.do" method="post">
 				<table>
 					<tr>
-						<th><label for="aid">아이디</label></th>
+						<th><label for="mid">아이디</label></th>
 						<td>
-							<input type="text" name="aid" id="aid">
+							<input type="text" name="mid" id="mid" value="${mid }">
 						</td>
 					</tr>
 					<tr>
-						<th><label for="apw">비밀번호</label></th>
+						<th><label for="mpw">비밀번호</label></th>
 						<td>
-							<input type="password" name="apw" id="apw">
+							<input type="password" name="mpw" id="mpw">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td class="join"><a href="${conPath }/memberJoinView.do">회원가입</a></td>
+						<td>
 							<input type="submit" value="로그인">
 						</td>
 					</tr>

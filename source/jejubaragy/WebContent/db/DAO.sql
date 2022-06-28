@@ -3,7 +3,7 @@ SELECT * FROM ADMIN;
 -- 관리자 로그인
 SELECT * FROM ADMIN WHERE AID='admin' AND APW='123';
 -- 아이디 중복 확인
-SELECT * FROM ADMIN WHERE AID = 'aaa';
+SELECT * FROM ADMIN WHERE AID = 'admin';
 -- 관리자 등록
 INSERT INTO ADMIN( AID, APW, ANAME) VALUES('admin', '123', '홍길동');
 --관리자 수
@@ -43,17 +43,26 @@ SELECT *
                                 WHERE MID LIKE '%'||'a'||'%' AND
                                            MNAME LIKE '%'||'홍'||'%' AND
                                            MSTATUS = 1
-                                ORDER BY MID, MRDATE DESC) A );
+                                ORDER BY MID, MRDATE DESC) A )
+    WHERE RN BETWEEN 1 AND 10;
+-- 탈퇴/강등 회원 검색
+SELECT * 
+    FROM (SELECT ROWNUM RN, A.*
+                    FROM (SELECT * FROM MEMBER
+                                WHERE MID LIKE '%'||'a'||'%' AND
+                                           MNAME LIKE '%'||'홍'||'%' AND
+                                           MSTATUS = 0
+                                ORDER BY MID, MRDATE DESC) A )
+    WHERE RN BETWEEN 1 AND 10;
 -- 회원 정보 수정
 UPDATE MEMBER 
     SET MPW = '111',
-          MNAME = '박길동',
-          MPHOTO = NULL
-    WHERE MID = 'bbb';
+          MNAME = '홍길동',
+          MPHOTO = 'noImage.png'
+    WHERE MID = 'aaa';
     
 -- 회원 탈퇴(삭제)
-UPDATE MEMBER SET MSTATUS = 1 WHERE MID = 'aaa';
-
+UPDATE MEMBER SET MSTATUS = 0 WHERE MID = 'aaa';
 
 -- CATEGORY -- 
 -- 카테고리 목록

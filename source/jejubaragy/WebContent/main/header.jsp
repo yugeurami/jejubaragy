@@ -9,10 +9,20 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
 	<link href="${conPath }/css/header.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#down').click(function(){
+				var check = confirm('정말 탈퇴하시겠습니까?');
+				if(check){
+					location.href="${conPath}/memberDown.do";
+				}
+			});
+		});
+	</script>
 </head>
 <body>
 	<c:set var="master" value="admin"></c:set>
@@ -36,17 +46,19 @@
 			</ul>
 			<ul class="right">
 				<c:if test="${empty member && empty admin }">
-					<li><a href="${conPath }/memberLogin.do">로그인</a></li>
+					<li><a href="${conPath }/memberLoginView.do">로그인</a></li>
 					<li><a href="${conPath }/memberJoinView.do">회원가입</a></li>
 				</c:if>
 				<c:if test="${not empty member }">
+					<li><a href="${conPath }/memberDelete.do">회원탈퇴</a></li>
 					<li><a href="${conPath }/logout.do">로그아웃</a></li>
 					<li><a href="${conPath }/memberModifyView.do">회원정보수정</a></li>
-					<li>${member.mname }님</li>
+					<li><span>${member.mname }님</span></li>
+					<li><img alt="회원사진" src="${conPath }/memberPhotoUp/${member.mphoto }"></li>
 				</c:if>
 				<c:if test="${not empty admin }">
 					<li><a href="${conPath }/logout.do">관리자모드 끝내기</a></li>
-					<li>관리자님</li>
+					<li><span>${admin.aname } 관리자님</span></li>
 				</c:if>
 			</ul>
 		</div>

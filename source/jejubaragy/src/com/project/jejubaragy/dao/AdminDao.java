@@ -12,8 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.omg.PortableInterceptor.NON_EXISTENT;
-
 import com.project.jejubaragy.dto.AdminDto;
 
 public class AdminDao {
@@ -73,21 +71,25 @@ public class AdminDao {
 	public int adminIdCheck(String aid) {
 		int result = EXISTENCE;
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) CNT FROM ADMIN";
+		String sql = "SELECT * FROM ADMIN WHERE AID = ?";
 		try {
 			conn = getConnection();
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, aid);
+			rs = pstmt.executeQuery();
 			if(!rs.next()) {
 				result = NON_EXISTENCE;
+			}else {
+				result = EXISTENCE;
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
 				if(rs!=null) rs.close();
-				if(stmt!=null) stmt.close();
+				if(pstmt!=null) pstmt.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e2) {
 				System.out.println(e2.getMessage());
@@ -100,14 +102,16 @@ public class AdminDao {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO ADMIN( AID, APW, ANAME) VALUES(?, ?, ?)";
+		String sql = "INSERT INTO ADMIN(AID, APW, ANAME) VALUES(?, ?, ?)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getAid());
 			pstmt.setString(2, dto.getApw());
 			pstmt.setString(3, dto.getAname());
+			System.out.println(dto);
 			result = pstmt.executeUpdate();
+			System.out.println(result);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -130,6 +134,7 @@ public class AdminDao {
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 			rs.next();
 			cnt = rs.getInt("cnt");
 		} catch (SQLException e) {

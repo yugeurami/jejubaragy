@@ -17,7 +17,6 @@ public class AdminJoinService implements Service {
 		AdminDto dto = new AdminDto(aid, apw, aname);
 		int result = dao.adminJoin(dto);
 		if(result == AdminDao.SUCCESS) {
-			request.setAttribute("admin", dto);
 			request.setAttribute("joinResult", AdminDao.SUCCESS);
 		}else {
 			request.setAttribute("joinResult", AdminDao.FAIL);

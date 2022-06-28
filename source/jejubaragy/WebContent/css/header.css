@@ -23,27 +23,33 @@ header #nav .left li .logo{
 	font-weight: bold;
 	color : #FFC286;
 }
-header #nav .left li .logo br{
-	width : 0px;
-}
 header #nav .right li{
 	float : right;
 }
 header #nav ul.right li a{
-	width : 80px;
 	font-size : 20px;
 }
 #nav ul li{
 	list-style : none;
 }
 #nav ul li a{
-	width : 100px;
+	width : 150px;
 	line-height : 65px;
 	text-align : center;
 	text-decoration : none;
 	font-weight: bold;
 	display : block;
 	color : #B4C6A6;
+}
+#nav ul.right li span{
+	width : 150px;
+	font-size : 20px;
+	line-height : 65px;
+	text-align : center;
+	text-decoration : none;
+	font-weight: bold;
+	display : block;
+	color : #66806A;
 }
 #nav ul li a:hover{
 	color : #66806A;

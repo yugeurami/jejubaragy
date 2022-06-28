@@ -13,9 +13,18 @@ import com.project.jejubaragy.service.AdminIdCheckService;
 import com.project.jejubaragy.service.AdminJoinService;
 import com.project.jejubaragy.service.AdminListService;
 import com.project.jejubaragy.service.AdminLoginService;
+import com.project.jejubaragy.service.LogoutService;
+import com.project.jejubaragy.service.MemberDownListService;
+import com.project.jejubaragy.service.MemberDownService;
+import com.project.jejubaragy.service.MemberIdCheckService;
+import com.project.jejubaragy.service.MemberJoinService;
+import com.project.jejubaragy.service.MemberListService;
+import com.project.jejubaragy.service.MemberLoginService;
+import com.project.jejubaragy.service.MemberModifyService;
+import com.project.jejubaragy.service.MemberUpService;
 import com.project.jejubaragy.service.Service;
 
-@WebServlet("/FrontController")
+@WebServlet("*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private boolean readPage = false;
@@ -38,10 +47,14 @@ public class FrontController extends HttpServlet {
 		if(command.equals("/main.do")) {
 			viewPage = "main/main.jsp";
 		}else if(command.equals("/adminLoginView.do")) {
+			readPage = true;
 			viewPage = "admin/adminLogin.jsp";
 		}else if(command.equals("/adminLogin.do")) {
-			service = new AdminLoginService();
-			service.execute(request, response);
+			if(readPage) {
+				service = new AdminLoginService();
+				service.execute(request, response);
+				readPage = false;
+			}
 			viewPage = "main.do";
 		}else if(command.equals("/adminList.do")) {
 			service = new AdminListService();
@@ -49,18 +62,76 @@ public class FrontController extends HttpServlet {
 			viewPage = "admin/adminList.jsp";
 		}else if(command.equals("/adminJoinView.do")) {
 			readPage = true;
-			viewPage = "admin/AdminJoin.jsp";
+			viewPage = "admin/adminJoin.jsp";
 		}else if(command.equals("/adminJoin.do")) {
 			if(readPage) {
 				service = new AdminJoinService();
 				service.execute(request, response);
 				readPage = false;
 			}
-			viewPage = "adminLoginView.do";
-		}else if(command.equals("/AdminIdCheck.do")) {
+			viewPage = "adminList.do";
+		}else if(command.equals("/adminIdCheck.do")) {
 			service = new AdminIdCheckService();
 			service.execute(request, response);
-			viewPage = "admin/AdminIdCheck.jsp";
+			viewPage = "admin/adminIdCheck.jsp";
+		}else if(command.equals("/memberList.do")) {
+			service = new MemberListService();
+			service.execute(request, response);
+			viewPage = "member/memberList.jsp";
+		}else if(command.equals("/memberDownList.do")) {
+			service = new MemberDownListService();
+			service.execute(request, response);
+			viewPage = "member/memberDownList.jsp";
+		}else if(command.equals("/logout.do")) {
+			service = new LogoutService();
+			service.execute(request, response);
+			viewPage = "main.do";
+		}else if(command.equals("/memberLoginView.do")) {
+			readPage = true;
+			viewPage = "member/memberLogin.jsp";
+		}else if(command.equals("/memberLogin.do")) {
+			if(readPage) {
+				service = new MemberLoginService();
+				service.execute(request, response);
+				readPage = false;
+			}
+			viewPage = "main.do";
+		}else if(command.equals("/memberJoinView.do")) {
+			readPage = true;
+			viewPage = "member/memberJoin.jsp";
+		}else if(command.equals("/memberJoin.do")) {
+			if(readPage) {
+				service = new MemberJoinService();
+				service.execute(request, response);
+				readPage = false;
+			}
+			viewPage = "memberLoginView.do";
+		}else if(command.equals("/memberIdCheck.do")) {
+			service = new MemberIdCheckService();
+			service.execute(request, response);
+			viewPage = "member/memberIdCheck.jsp";
+		}else if(command.equals("/memberModifyView.do")) {
+			readPage = true;
+			viewPage = "member/memberModify.jsp";
+		}else if(command.equals("/memberModify.do")) {
+			if(readPage) {
+				service = new MemberModifyService();
+				service.execute(request, response);
+				readPage = false;
+			}
+			viewPage = "main.do";
+		}else if(command.equals("/memberDown.do")) {
+			service = new MemberDownService();
+			service.execute(request, response);
+			viewPage = "memberList.do";
+		}else if(command.equals("/memberDelete.do")) {
+			service = new MemberDownService();
+			service.execute(request, response);
+			viewPage = "logout.do";
+		}else if(command.equals("/memberUp.do")) {
+			service = new MemberUpService();
+			service.execute(request, response);
+			viewPage = "memberDownList.do";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

@@ -7,11 +7,18 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>제주바라기:관리자리스트</title>
+	<c:set var="master" value="admin"/>
+	<c:if test="${admin.aid != master }">
+		<script>
+			location.href="${conPath}/main.do";
+		</script>
+	</c:if>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('.delete').click(function(){
+			
+			$('#delete').click(function(){
 				var check = confirm('정말 삭제하시겠습니까?')
 				if(check){
 					location.href="${conPath}/adminDelete.do";
@@ -22,26 +29,42 @@
 			});
 		});
 	</script>
+	<c:set var="SUCCESS" value="1"/>
+	<c:set var="FAIL" value="0"/>
+	<c:if test="${joinResult eq FAIL}">
+		<script>
+			alert('관리자 등록 실패');
+			location.href="${conPath}/adminJoinView.do";
+		</script>
+	</c:if>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div class="contents">
+	<div class="list">
 		<form method="post">
 			<table>
 				<tr>
 					<th>이름</th>
 					<th>아이디</th>
 					<th>비밀번호</th>
+					<td></td>
 				</tr>
-				<c:forEach var="admin" items="${adminlist }">
+				<c:forEach var="admins" items="${adminlist }">
 					<tr>
-						<td>${admin.aname }</td>
-						<td>${admin.aid }</td>
+						<td>${admins.aname }</td>
+						<td>${admins.aid }</td>
 						<td>
-							${admin.apw }
-							<input type="hidden" value="${admin.aid }">
+							${admins.apw }
+						</td>
+						<td>
+							<input type="hidden" value="${admins.aid }">
 							<input type="hidden" value="${pageNum }">
-							<input type="button" id="delete" value="삭제">
+							<c:if test="${admins.aid != master}">
+								<input type="button" id="delete" value="삭제">
+							</c:if>
+							<c:if test="${admins.aid eq master}">
+								<span>최고 관리자</span>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
