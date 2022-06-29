@@ -15,10 +15,10 @@ import javax.sql.DataSource;
 import com.project.jejubaragy.dto.AdminDto;
 
 public class AdminDao {
-	public static final int SUCCESS = 1;
-	public static final int FAIL = 0;
 	public static final int EXISTENCE = 1;
 	public static final int NON_EXISTENCE = 0;
+	public static final int SUCCESS = 1;
+	public static final int FAIL = 0;
 	
 	private static AdminDao instance = new AdminDao();
 	public static AdminDao getInstance() {

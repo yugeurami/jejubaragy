@@ -23,6 +23,7 @@ import com.project.jejubaragy.service.MemberLoginService;
 import com.project.jejubaragy.service.MemberModifyService;
 import com.project.jejubaragy.service.MemberUpService;
 import com.project.jejubaragy.service.Service;
+import com.project.jejubaragy.service.SpotListService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -132,6 +133,10 @@ public class FrontController extends HttpServlet {
 			service = new MemberUpService();
 			service.execute(request, response);
 			viewPage = "memberDownList.do";
+		}else if(command.equals("/spotSearch.do")) {
+			service = new SpotListService();
+			service.execute(request, response);
+			viewPage = "spot/spotList.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

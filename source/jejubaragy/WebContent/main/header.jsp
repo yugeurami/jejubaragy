@@ -32,9 +32,9 @@
 				<li>
 					<div class="logo">제주바라기</div>
 				</li>
-				<li><a href="${conPath }/travleSpotList.do">여행지</a></li>
+				<li><a href="${conPath }/spotSearch.do">여행지</a></li>
 				<c:if test="${not empty member }">
-					<li><a href="${conPath }/routeMakeView.do">여행 계획</a></li>
+					<li><a href="${conPath }/routeMakeView.do">여행 계획하기</a></li>
 					<li><a href="${conPath }/myRouteList.do">내 여행</a></li>
 				</c:if>
 				<c:if test="${not empty admin }">

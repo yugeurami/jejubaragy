@@ -64,24 +64,47 @@ UPDATE MEMBER
 -- 회원 탈퇴(삭제)
 UPDATE MEMBER SET MSTATUS = 0 WHERE MID = 'aaa';
 
+
 -- CATEGORY -- 
 -- 카테고리 목록
-SELECT * FROM CATEGORY;
--- 카테고리 등록
-INSERT INTO CATEGORY (CNUM, CNAME)
-                    VALUES(CATEGORY_SEQ.NEXTVAL, '관광명소');
--- 카테고리 수정
-UPDATE CATEGORY SET CNAME = '관광명소' WHERE CNUM = 1;
--- 카테고리 삭제
-DELETE FROM CATEGORY WHERE CNUM = 1; 
+SELECT * FROM CATEGORY ORDER BY CCODE;
 
--- TRAVELSPOT -- 
--- 여행지 목록
-SELECT * FROM TRAVELSPOT;
+
+
+-- SPOT -- 
+SELECT * FROM SPOT;
+-- 여행지 검색해서 출력(카테고리/장소명/좌표)
+SELECT A.*, CNAME 
+    FROM (SELECT * FROM SPOT
+                WHERE CCODE = 'AT4' AND
+                SNAME LIKE '%'||' '||'%' ) A, CATEGORY C
+    WHERE A.CCODE=C.CCODE
+    ORDER BY SNAME;
+    
+    
+-- 여행지 하나 자세히 보기(+관련 글도 보이게 해야함 BOARD 쿼리에 만들기)
+SELECT S.*, CNAME 
+    FROM SPOT S, CATEGORY C
+    WHERE S.CCODE=C.CCODE AND SID=7912085;
+
+
+-- 중복된 여행지 체크
+SELECT * FROM SPOT WHERE SID = 7912085;
+
 -- 여행지 등록
-
+INSERT INTO SPOT(SID, CCODE, SNAME, SPHOTO, SADDRESS, DESCRIPTION )
+                    VALUES(7912085, 'AT4', '비자림', '비자림.jpg', '제주특별자치도 제주시 구좌읍 평대리 3161-1',  '걷기 좋은 비자숲길');     
 -- 여행지 수정
+UPDATE SPOT
+    SET CCODE = 'AT4',
+          SNAME = '비자림',
+          SPHOTO = '비자림.jpg',
+          SADDRESS = '제주특별자치도 제주시 구좌읍 평대리 3161-1',
+          DESCRIPTION = '걷기 좋은 비자숲길'
+    WHERE SID = 7912085;
+
 -- 여행지 삭제
+DELETE FROM SPOT WHERE SID = 7912085;
 
 
 -- ROUTE / DETAILROUTE / STORAGE -- 
@@ -90,4 +113,9 @@ SELECT * FROM TRAVELSPOT;
 -- 루트 수정
 -- 루트 저장
 -- 타인 루트 저장
--- 
+
+-- BOARD
+-- 자세히 보기한 여행지가 포함된 글 찾기
+SELECT * FROM BOARD
+    WHERE RNUM = ( SELECT RNUM FROM DETAILROUTE WHERE SID = 7912085 )
+    ORDER BY BHIT DESC;
