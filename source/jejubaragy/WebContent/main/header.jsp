@@ -18,7 +18,7 @@
 			$('#down').click(function(){
 				var check = confirm('정말 탈퇴하시겠습니까?');
 				if(check){
-					location.href="${conPath}/memberDown.do";
+					location.href="${conPath}/memberDelete.do";
 				}
 			});
 		});
@@ -32,7 +32,7 @@
 				<li>
 					<div class="logo">제주바라기</div>
 				</li>
-				<li><a href="${conPath }/spotSearch.do">여행지</a></li>
+				<li><a href="${conPath }/spotList.do">여행지</a></li>
 				<c:if test="${not empty member }">
 					<li><a href="${conPath }/routeMakeView.do">여행 계획하기</a></li>
 					<li><a href="${conPath }/myRouteList.do">내 여행</a></li>
@@ -50,7 +50,7 @@
 					<li><a href="${conPath }/memberJoinView.do">회원가입</a></li>
 				</c:if>
 				<c:if test="${not empty member }">
-					<li><a href="${conPath }/memberDelete.do">회원탈퇴</a></li>
+					<li><a href="" id="down">회원탈퇴</a></li>
 					<li><a href="${conPath }/logout.do">로그아웃</a></li>
 					<li><a href="${conPath }/memberModifyView.do">회원정보수정</a></li>
 					<li><span>${member.mname }님</span></li>

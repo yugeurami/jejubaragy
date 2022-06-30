@@ -7,32 +7,33 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>제주바라기:여행지</title>
 	<link href="${conPath }/css/map.css" rel="stylesheet">
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
 		<div id="ccode">
+			<form action="spotList.do" method="post">
+				<input type="hidden" name="ccode" value="">
+				<input type="submit" class="thisCategory" value="전체">
+			</form>
 			<c:forEach var="category" items="${categoryList }">
 				<form action="spotList.do" method="post">
-					<input type="hidden" value="${category.ccode }">
-					<c:if test="${ccode eq category.ccode }">
-						<input type="button" class="thisCategory" value="${category.cname }">
+					<input type="hidden" name="ccode" value="${category.ccode }">
+					<c:if test="${code eq category.ccode }">
+						<input type="submit" class="thisCategory" value="${category.cname }">
 					</c:if>
-					<c:if test="${ccode != category.ccode }">
-						<input type="button" class="notThisCategory" value="${category.cname }">
+					<c:if test="${code != category.ccode }">
+						<input type="submit" class="notThisCategory" value="${category.cname }">
 					</c:if>
 				</form>
 			</c:forEach>
-		</div>
-		<div id="search">
-			<form action="spotList.do">
-				<input type="text" name="search">
-				<input type="submit">
-			</form>
 		</div>
 		<div class="main_wrap">
 			<div class="wrap">
@@ -47,71 +48,104 @@
 				</div>
 			</div>
 			<div id="spotlist">
-				<table>
+				<div id="search">
+					<form action="spotList.do" method="post">
+						<input type="hidden" name="ccode" value="${code }">
+						<input type="text" name="search" value="${search }">
+						<input type="submit">
+					</form>
+				</div>
+				<div id="list">
 					<c:forEach var="spot" items="${spotList }">
-						<tr>
-							<td>
-								<img alt="장소사진" class="img" src="${conPath }/spotPhotoUp/${spot.sphoto }">
-								<span class="bold">${spot.sname }</span><br>
-								<span class="light">${spot.description }</span>
-							</td>
-						</tr>
+						<div class="detail">
+							<img alt="장소사진" class="img" src="${conPath }/spotPhotoUp/${spot.sphoto }">
+							<span class="bold">${spot.sname }</span>
+							<span class="light">${spot.description }</span>
+						</div>
 					</c:forEach>
-				</table>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
 		<script>
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		    mapOption = {
-		        center: new kakao.maps.LatLng(33.379777816446165, 126.54587355630036), // 지도의 중심좌표
-		        level: 10 // 지도의 확대 레벨
-		    };  
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new kakao.maps.LatLng(33.379777816446165, 126.54587355630036), // 지도의 중심좌표
+			        level: 9 // 지도의 확대 레벨
+			    };  
+			
+			// 지도를 생성합니다    
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+			
+			// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+			function zoomIn() {
+			    map.setLevel(map.getLevel() - 1);
+			}
 		
-		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
-		
-		// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-		function zoomIn() {
-		    map.setLevel(map.getLevel() - 1);
-		}
-	
-		// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-		function zoomOut() {
-		    map.setLevel(map.getLevel() + 1);
-		}
-		
-		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Geocoder();
+			// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+			function zoomOut() {
+			    map.setLevel(map.getLevel() + 1);
+			}
+			
+			var center = map.getCenter();
+			
+			kakao.maps.event.addListener(map, 'dragend', function(){
+				
+				var eventCenter = map.getCenter();
+				
+				//서쪽 최대 좌표
+				var minLat = 33.056182808098555;
+				//동쪽 최대좌표
+				var maxLat = 33.61594912826407;
+				//남쪽 최대 좌표
+				var minLng = 126.07345860682933;
+				//북쪽 최대좌표
+				var maxLng = 127.08920821955245;
+				
+				if(	minLat > eventCenter.getLat() || 
+					eventCenter.getLat() > maxLat ||
+					minLng > eventCenter.getLng() ||
+					eventCenter.getLng() > maxLng){
+						map.setCenter(center);
+				}
+			});
 		</script>
-		
-		<c:forEach var="dto" items="${spotlist }">
-			<script>
-			// 주소로 좌표를 검색합니다
-				geocoder.addressSearch('${dto.saddress}', function(result, status) {
+			<c:forEach var="spot" items="${spotList }">
+				<script>
+				// 주소-좌표 변환 객체를 생성합니다
+				var geocoder = new kakao.maps.services.Geocoder();
 				
-				    // 정상적으로 검색이 완료됐으면 
-				     if (status === kakao.maps.services.Status.OK) {
-				
-				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-				        // 결과값으로 받은 위치를 마커로 표시합니다
-				        var marker = new kakao.maps.Marker({
-				            map: map,
-				            position: coords
-				        });
-				
-				        // 인포윈도우로 장소에 대한 설명을 표시합니다
-				        var infowindow = new kakao.maps.InfoWindow({
-				            content: '<div class="info-title" style="width:150px;text-align:center;padding:0;">${dto.sname}(${dto.sid})</div>',
-				            removable : true
-				        });
-				        infowindow.open(map, marker);
-				
-				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-				        map.setCenter(coords);
-				    } 
-				});    
-			</script>
+				// 주소로 좌표를 검색합니다
+					geocoder.addressSearch('${spot.saddress}', function(result, status) {
+					
+					    // 정상적으로 검색이 완료됐으면 
+					     if (status === kakao.maps.services.Status.OK) {
+					
+					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+							// 마커 이미지 변경하기
+					        var imageSrc = '이미지주소', // 마커이미지의 주소입니다    
+   								imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+    							imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+					        
+    						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+    							
+					        // 결과값으로 받은 위치를 마커로 표시합니다
+    						var marker = new kakao.maps.Marker({
+						          map: map,
+						          position: coords,
+						          image: markerImage
+					        });
+					
+					        // 인포윈도우로 장소에 대한 설명을 표시합니다
+					        var infowindow = new kakao.maps.InfoWindow({
+					            content: '<div class="info-title">${spot.sname}</div>',
+					            removable : true
+					        });
+					        infowindow.open(map, marker);
+					
+					    } 
+					});    
+				</script>
 		</c:forEach>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>

@@ -45,7 +45,7 @@ public class SpotDao {
 		ResultSet rs = null;
 		String sql = "SELECT A.*, CNAME" + 
 				"    FROM (SELECT * FROM SPOT" + 
-				"                WHERE CCODE = ? AND" + 
+				"                WHERE CCODE LIKE '%'||?||'%' AND" + 
 				"                SNAME LIKE '%'||?||'%' ) A, CATEGORY C" + 
 				"    WHERE A.CCODE=C.CCODE" + 
 				"    ORDER BY SNAME";

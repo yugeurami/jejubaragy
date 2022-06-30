@@ -13,12 +13,14 @@ public class SpotListService implements Service {
 		CategoryDao cdao = CategoryDao.getInstance();
 		request.setAttribute("categoryList", cdao.categoryList());
 		String ccode = request.getParameter("ccode");
-		if(ccode == null ) {
-			ccode = "AT4";
+		if(ccode == null) {
+			ccode = "";
 		}
 		SpotDao sdao = SpotDao.getInstance();
-		String sname = request.getParameter("sname");
-		request.setAttribute("spotList", sdao.spotList(ccode, sname));
+		String search = request.getParameter("search");
+		request.setAttribute("spotList", sdao.spotList(ccode, search));
+		request.setAttribute("code", ccode);
+		request.setAttribute("search", search);
 	}
 
 }

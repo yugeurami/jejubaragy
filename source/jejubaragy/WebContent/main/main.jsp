@@ -37,15 +37,13 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<div id="best">
-			<tr>
+		<div id="best_wrap">
+			<div class="best">
 				<c:forEach var="best" items="${best }">
-					<td>
-						<p><img alt="베스트글사진" src="${conPath }/boardPhotoUP/${best.mainphoto }"></p>
-						<p class="btitle">${best.btitle }</p>
-					</td>
+					<img alt="베스트글사진" src="${conPath }/boardPhotoUP/${best.mainphoto }">
+					<p class="btitle">${best.btitle }</p>
 				</c:forEach>
-			</tr>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>

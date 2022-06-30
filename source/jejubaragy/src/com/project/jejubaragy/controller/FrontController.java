@@ -133,7 +133,7 @@ public class FrontController extends HttpServlet {
 			service = new MemberUpService();
 			service.execute(request, response);
 			viewPage = "memberDownList.do";
-		}else if(command.equals("/spotSearch.do")) {
+		}else if(command.equals("/spotList.do")) {
 			service = new SpotListService();
 			service.execute(request, response);
 			viewPage = "spot/spotList.jsp";
