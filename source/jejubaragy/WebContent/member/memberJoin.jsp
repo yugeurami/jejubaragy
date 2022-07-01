@@ -71,28 +71,34 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-	<div class="Join">
+	<div id="join">
 		<form action="${conPath }/memberJoin.do" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<th><label for="mid">아이디</label></th>
+					<th><label for="mname">NAME</label></th>
+					<td>
+						<input type="text" name="mname" id="mname" required="required">
+					</td>
+				</tr>
+				<tr>
+					<th><label for="mid">ID</label></th>
 					<td>
 						<input type="text" name="mid" id="mid" required="required">
-						<input type="button" id="idChk" value="아이디 중복확인">
+						<input type="button" id="idChk" value="ID CHECK">
 					</td>
 				</tr>
 				<tr class="check">
-					<td> </td>
+					<td></td>
 					<td><div id="idCheckResult"> &nbsp; </div></td>
 				</tr>
 				<tr>
-					<th><label for="mpw">비밀번호</label></th>
+					<th><label for="mpw">PASSWORD</label></th>
 					<td>
 						<input type="password" name="mpw" id="mpw" required="required">
 					</td>
 				</tr>
 				<tr>
-					<th><label for="pwchk">비밀번호 확인</label></th>
+					<th><label for="pwchk">PASSWORD CHECK</label></th>
 					<td>
 						<input type="password" name="pwChk" id="pwChk" required="required">
 					</td>
@@ -102,25 +108,19 @@
 					<td><div id="pwCheckResult"> &nbsp; </div></td>
 				</tr>
 				<tr>
-					<th><label for="mname">이름</label></th>
-					<td>
-						<input type="text" name="mname" id="mname" required="required">
-					</td>
-				</tr>
-				<tr>
-					<th>프로필 사진</th>
+					<th>PROFILE PHOTO</th>
 					<td>
 						<input type="file" name="mphoto">
 					</td>
 				</tr>
 				<tr class="button">
 					<td colspan="2">
-						<input type="submit" value="회원가입">
+						<input type="submit" value="JOIN">
 					</td>
 				</tr>
 			</table>
 		</form>
+		<jsp:include page="../main/footer.jsp"/>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

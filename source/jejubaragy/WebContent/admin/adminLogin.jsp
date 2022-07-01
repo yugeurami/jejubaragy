@@ -8,27 +8,35 @@
 <head>
 	<meta charset="UTF-8">
 	<title>관리자 로그인 페이지</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="${conPath }/css/login.css" rel="stylesheet">
+	<c:if test="${not empty admin || not empty member }">
+		<script>
+			location.href="${conPath}/main.do";
+		</script>
+	</c:if>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
-		<div class="login">
+		<div id="login">
 			<form action="${conPath }/adminLogin.do" method="post">
 				<table>
 					<tr>
-						<th><label for="aid">아이디</label></th>
+						<th><label for="aid">ID</label></th>
 						<td>
 							<input type="text" name="aid" id="aid">
 						</td>
-					</tr>
-					<tr>
-						<th><label for="apw">비밀번호</label></th>
-						<td>
-							<input type="password" name="apw" id="apw">
+						<td id="button" rowspan="2">
+							<input type="submit" value="LOGIN">
+							
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<input type="submit" value="로그인">
+						<th><label for="apw">PASSWORD</label></th>
+						<td>
+							<input type="password" name="apw" id="apw">
 						</td>
 					</tr>
 				</table>

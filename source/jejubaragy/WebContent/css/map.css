@@ -3,64 +3,76 @@
 	font-family: 'Noto Sans KR', sans-serif;	
 }
 #main{
-	width : 75%;
-	margin : 0 auto;
+	width : 70%;
+	position : absolute;
+	top : 80px;
+	right : 100px;
 }
 #main #ccode{
-	overflow : hidden;	
 	height : 55px;
 }
-#main #ccode input{
+#main #ccode ul{
+	overflow : hidden;	
+}
+#main #ccode ul li{
+	width : 8%;
 	float : left;
-	width : 7%;
+	list-style : none;
+}
+#main #ccode ul li a{
 	height : 40px;
+	display : block;
+	border-bottom : none;
+	text-decoration : none;
+	border-radius : 20px 20px 0 0;
+	border-color : #66806A;
+	font-size : 1.1em;
+	font-weight : 300;
+	margin-top : 15px;
+	background-color : #66806A;
+	color : white;
+}
+#main #ccode ul li .unselected {
+	height : 40px;
+	display : block;
 	border-bottom : none;
 	border-radius : 20px 20px 0 0;
 	border-color : #66806A;
 	font-size : 1.1em;
 	font-weight : 300;
-}
-#main #ccode .thisCategory{
-	width : 8%;
-	height : 45px;
-	color : #66806A;
-	font-size : 1.15em;
-	font-weight : 400;
-	margin-top : 10px;
-	border-color : #B4C6A6;
-	background-color : #B4C6A6;
-	box-shadow: 8px -3px 8px grey;
-}
-#main #ccode .notThisCategory{
 	margin-top : 15px;
 	background-color : #66806A;
-	color : white;
+	color : white;	
 }
-#main #ccode .notThisCategory:hover{
-	width : 8%;
+
+#main #ccode ul li a:hover{
 	height : 45px;
-	margin-top : 10px;
 	color : #66806A;
-	font-size : 1.1em;
+	display : block;
+	margin-top : 10px;
 	font-weight : 400;
+	font-size : 1.15em;
 	border-color : #B4C6A6;
 	background-color : #B4C6A6;
 	box-shadow: 8px -3px 10px grey;
 }
+
 .main_wrap{
+	overflow : hidden;
 	background-color : #B4C6A6;
-	overflow : hidden
+	box-shadow: 8px 5px 5px grey;
+	border-radius : 0px 20px 20px 20px;
 }
 .main_wrap .wrap{
 	float : left;
 	width : 70%;
-	height : 100%; 
+	height : 90%; 
 	padding: 20px;
 }
 .map_wrap {
-	position:relative;
-	overflow:hidden;
-	height : 1000px;
+	position : relative;
+	overflow : hidden;
+	height : 900px;
 }
 .map_wrap #map{
 	width:100%; 
@@ -101,7 +113,7 @@
 .main_wrap #spotlist{
 	float : left;
 	width : 23%;
-	height : 1040px;
+	height : 920px;
 	padding :20px;
 	background-color : #B4C6A6;
 }
@@ -143,6 +155,7 @@
 	margin-bottom : 5px;
 	background-color : white;
 	border-radius : 10px 0 0 10px;
+	box-shadow: 8px 3px 10px grey;
 }
 .main_wrap #spotlist #list .detail img{
 	float : left;
@@ -171,4 +184,15 @@
 	 width:150px;
 	 text-align:center;
 	 padding:0;
+}
+.selected{
+	height : 45px;
+	color : #66806A;
+	display : block;
+	margin-top : 10px;
+	font-weight : 400;
+	font-size : 1.15em;
+	border-color : #B4C6A6;
+	background-color : #B4C6A6;
+	box-shadow: 8px -3px 8px grey;
 }

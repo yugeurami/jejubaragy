@@ -80,12 +80,6 @@ SELECT A.*, CNAME
                 SNAME LIKE '%'||' '||'%' ) A, CATEGORY C
     WHERE A.CCODE=C.CCODE
     ORDER BY SNAME;
-    
-    
--- 여행지 하나 자세히 보기(+관련 글도 보이게 해야함 BOARD 쿼리에 만들기)
-SELECT S.*, CNAME 
-    FROM SPOT S, CATEGORY C
-    WHERE S.CCODE=C.CCODE AND SID=7912085;
 
 
 -- 중복된 여행지 체크
@@ -115,7 +109,90 @@ DELETE FROM SPOT WHERE SID = 7912085;
 -- 타인 루트 저장
 
 -- BOARD
--- 자세히 보기한 여행지가 포함된 글 찾기
-SELECT * FROM BOARD
-    WHERE RNUM = ( SELECT RNUM FROM DETAILROUTE WHERE SID = 7912085 )
-    ORDER BY BHIT DESC;
+-- 총 게시글 수
+SELECT COUNT(*) CNT FROM BOARD;
+
+-- 게시글 페이징
+SELECT * 
+    FROM (  SELECT ROWNUM RN, A.*
+                    FROM (  SELECT *
+                                    FROM BOARD
+                                    ORDER BY BNUM DESC) A )
+    WHERE RN BETWEEN 1 AND 10;
+
+-- 게시글 작성
+INSERT INTO BOARD(BNUM, MID, AID, BWRITER, RNUM, BTITLE, BCONTENT, BMAINPHOTO, BHIT, BIP, BRDATE)
+                VALUES(BOARD_SEQ.NEXTVAL, 'aaa' , NULL, '홍길동', NULL, '게시글1', '안녕하세요', NULL, 0, '126.00.001', SYSDATE);
+                
+-- 게시글 조회수 올리기
+UPDATE BOARD SET BHIT = BHIT + 1 WHERE BNUM = 1;
+
+-- 게시글 자세히 보기
+SELECT * FROM BOARD WHERE BNUM = 1;
+
+-- 게시글 수정
+UPDATE BOARD
+    SET BTITLE = '수정된 게시글',
+          BCONTENT = '수정했습니다',
+          BMAINPHOTO = NULL
+    WHERE BNUM = 2;
+
+-- 베스트 글 보기
+SELECT * 
+    FROM (  SELECT ROWNUM RN, A.*
+                    FROM (  SELECT *
+                                    FROM BOARD
+                                    ORDER BY BHIT DESC) A )
+    WHERE RN BETWEEN 1 AND 5;
+      
+-- 여행지가 포함된 글 목록
+SELECT * 
+    FROM (  SELECT ROWNUM RN, A.*
+                    FROM (  SELECT * FROM BOARD
+                                    WHERE RNUM = ( SELECT RNUM FROM DETAILROUTE WHERE SID = '' )
+                                    ORDER BY BHIT DESC) A )
+    WHERE RN BETWEEN 1 AND 10;
+    
+-- 게시글 삭제
+DELETE FROM BOARD WHERE BNUM = 1;
+    
+    
+    
+-- COMMENTS
+-- 해당 글의 댓글 갯수
+SELECT COUNT(*) CNT FROM COMMENTS WHERE BNUM = 1;
+-- 댓글 페이징
+SELECT * 
+    FROM ( SELECT ROWNUM RN, A.*
+                FROM ( SELECT * 
+                            FROM COMMENTS
+                            WHERE BNUM = 1
+                            ORDER BY CGROUP DESC, CSTEP) A )
+    WHERE RN BETWEEN 1 AND 10;                
+
+-- 댓글 작성
+INSERT INTO COMMENTS(CID, MID, AID, CWRITER, CPHOTO, BNUM, CCONTENT, CGROUP, CSTEP, CINDENT, CRDATE, CIP)
+                    VALUES(COMMENTS_SEQ.NEXTVAL, NULL, 'admin', '관리자', NULL, 1, '글 작성 감사합니다', COMMENTS_SEQ.CURRVAL, 0, 0, SYSDATE, '127.00.001');
+                    
+-- 대댓글 작성로직
+    --이전 스텝
+    UPDATE COMMENTS SET CSTEP = CSTEP + 1
+        WHERE CGROUP = 1 AND CSTEP > 0 ;
+    --대댓글 작성
+    INSERT INTO COMMENTS(CID, MID, AID, CWRITER, CPHOTO, BNUM, CCONTENT, CGROUP, CSTEP, CINDENT, CRDATE, CIP)
+                    VALUES(COMMENTS_SEQ.NEXTVAL, NULL, 'admin', '관리자', NULL, 1, '글 작성 감사합니다', COMMENTS_SEQ.CURRVAL, 1, 1, SYSDATE, '127.00.001');
+
+-- 댓글 수정
+UPDATE COMMENTS
+    SET CCONTENT = '수정된 댓글입니다'
+    WHERE CID = 1;   
+    
+-- 댓글 삭제(대댓글까지 삭제)
+DELETE FROM COMMENTS 
+    WHERE CGROUP = 1 AND 
+                ( CSTEP >= 1 AND 
+                  CSTEP<( SELECT NVL( MIN(CSTEP), 9999 ) 
+                                FROM COMMENTS 
+                                WHERE CGROUP = 1 AND CSTEP > 1 AND CINDENT <= 1) );
+                                
+                                

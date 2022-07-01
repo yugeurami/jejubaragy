@@ -14,26 +14,27 @@
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#main #ccode ul li a').click(function(){
+				$('#main #ccode ul li a').addClass('unselected');
+				$(this).addClass('selected');
+			});
+		});
+	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
 		<div id="ccode">
-			<form action="spotList.do" method="post">
-				<input type="hidden" name="ccode" value="">
-				<input type="submit" class="thisCategory" value="전체">
-			</form>
-			<c:forEach var="category" items="${categoryList }">
-				<form action="spotList.do" method="post">
-					<input type="hidden" name="ccode" value="${category.ccode }">
-					<c:if test="${code eq category.ccode }">
-						<input type="submit" class="thisCategory" value="${category.cname }">
-					</c:if>
-					<c:if test="${code != category.ccode }">
-						<input type="submit" class="notThisCategory" value="${category.cname }">
-					</c:if>
-				</form>
-			</c:forEach>
+			<ul>
+				<li><a href="${conPath }/spotList.do">ALL</a></li>
+				<li><a href="${conPath }/spotList.do?ccode='AT4'" id="AT4">ATTRACTION</a></li>
+				<li><a href="${conPath }/spotList.do?ccode='CT1'" id="CT1">CULTURAL FACILITIES</a></li>
+				<li><a href="${conPath }/spotList.do?ccode='AD5'" id="AT4">ACCOMMODATION</a></li>
+				<li><a href="${conPath }/spotList.do?ccode='FD6'" id="FD6">RESTAURANT</a></li>
+				<li><a href="${conPath }/spotList.do?ccode='CE7'" id="CE7">CAFE</a></li>
+			</ul>
 		</div>
 		<div class="main_wrap">
 			<div class="wrap">
@@ -147,7 +148,7 @@
 					});    
 				</script>
 		</c:forEach>
+		<jsp:include page="../main/footer.jsp"/>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

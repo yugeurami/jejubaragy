@@ -20,10 +20,23 @@ INSERT INTO CATEGORY (CCODE, CNAME)
                     VALUES('CE7', '카페');
 
 
---SPOT                   
+-- SPOT                   
 INSERT INTO SPOT(SID, CCODE, SNAME, SPHOTO, SADDRESS, DESCRIPTION )
                     VALUES(7912085, 'AT4', '비자림', '비자림.jpg', '제주특별자치도 제주시 구좌읍 평대리 3161-1',  '걷기 좋은 비자숲길');                    
                     
+
+-- BOARD
+INSERT INTO BOARD(BNUM, MID, AID, BWRITER, RNUM, BTITLE, BCONTENT, BMAINPHOTO, BHIT, BIP, BRDATE)
+                VALUES(BOARD_SEQ.NEXTVAL, 'aaa' , NULL, '홍길동', NULL, '게시글1', '안녕하세요', NULL, 0, '126.00.001', SYSDATE);
+INSERT INTO BOARD(BNUM, MID, AID, BWRITER, RNUM, BTITLE, BCONTENT, BMAINPHOTO, BHIT, BIP, BRDATE)
+                VALUES(BOARD_SEQ.NEXTVAL, NULL , 'admin', '관리자', NULL, '게시글1', '안녕하세요', NULL, 0, '126.00.001', SYSDATE);
+
+
+
+-- COMMENTS
+INSERT INTO COMMENTS(CID, MID, AID, CWRITER, CPHOTO, BNUM, CCONTENT, CGROUP, CSTEP, CINDENT, CRDATE, CIP)
+                    VALUES(COMMENTS_SEQ.NEXTVAL, NULL, 'admin', '관리자', NULL, 1, '글 작성 감사합니다', COMMENTS_SEQ.CURRVAL, 0, 0, SYSDATE, '127.00.001');
+
 
 
 

@@ -11,6 +11,7 @@
 	<c:set var="master" value="admin"/>
 	<c:if test="${admin.aid != master }">
 		<script>
+			alert('권한이 없습니다');
 			location.href="${conPath}/main.do";
 		</script>
 	</c:if>

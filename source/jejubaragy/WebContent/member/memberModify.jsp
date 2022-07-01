@@ -13,6 +13,9 @@
 			location.href="${conPath}/main.do";
 		</script>
 	</c:if>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -93,10 +96,13 @@
 				</tr>
 				<tr class="button">
 					<td colspan="2">
-						<input type="submit" value="회원정보 수정">
+						<input type="submit" value="저장">
 					</td>
 				</tr>
 			</table>
+			<div class="delete">
+				<a href="${conPath }/memberDelete.do">회원탈퇴</a>
+			</div>
 		</form>
 	</div>
 	<jsp:include page="../main/footer.jsp"/>

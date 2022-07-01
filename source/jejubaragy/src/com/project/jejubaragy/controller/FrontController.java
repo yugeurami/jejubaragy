@@ -24,6 +24,7 @@ import com.project.jejubaragy.service.MemberModifyService;
 import com.project.jejubaragy.service.MemberUpService;
 import com.project.jejubaragy.service.Service;
 import com.project.jejubaragy.service.SpotListService;
+import com.project.jejubaragy.service.boardListService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -137,6 +138,10 @@ public class FrontController extends HttpServlet {
 			service = new SpotListService();
 			service.execute(request, response);
 			viewPage = "spot/spotList.jsp";
+		}else if(command.equals("/boardList.do")) {
+			service = new boardListService();
+			service.execute(request, response);
+			viewPage = "board/boardList.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

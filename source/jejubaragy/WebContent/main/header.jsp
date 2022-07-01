@@ -10,7 +10,7 @@
 	<title>Insert title here</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<link href="${conPath }/css/header.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
@@ -25,40 +25,41 @@
 	</script>
 </head>
 <body>
-	<c:set var="master" value="admin"></c:set>
 	<header>
-		<div id="nav">
-			<ul class="left">
-				<li>
-					<div class="logo">제주바라기</div>
-				</li>
-				<li><a href="${conPath }/spotList.do">여행지</a></li>
-				<c:if test="${not empty member }">
-					<li><a href="${conPath }/routeMakeView.do">여행 계획하기</a></li>
-					<li><a href="${conPath }/myRouteList.do">내 여행</a></li>
-				</c:if>
-				<c:if test="${not empty admin }">
-					<li><a href="${conPath }/memberList.do">회원 목록</a></li>
-					<c:if test="${admin.aid eq master }">
-						<li><a href="${conPath }/adminList.do">관리자 목록</a></li>						
-					</c:if>
-				</c:if>
-			</ul>
+		<div id="logo">
+			<div class="logoImg">
+				<a href="${conPath }/main.do">
+					<img alt="로고" src="https://via.placeholder.com/300x200">
+				</a>
+			</div>
+		</div>
+		<div id="top_nav">
 			<ul class="right">
 				<c:if test="${empty member && empty admin }">
-					<li><a href="${conPath }/memberLoginView.do">로그인</a></li>
-					<li><a href="${conPath }/memberJoinView.do">회원가입</a></li>
+					<li><a href="${conPath }/memberJoinView.do">JOIN US</a></li>
+					<li><a href="${conPath }/memberLoginView.do">LOGIN</a></li>
 				</c:if>
 				<c:if test="${not empty member }">
-					<li><a href="" id="down">회원탈퇴</a></li>
-					<li><a href="${conPath }/logout.do">로그아웃</a></li>
-					<li><a href="${conPath }/memberModifyView.do">회원정보수정</a></li>
-					<li><span>${member.mname }님</span></li>
-					<li><img alt="회원사진" src="${conPath }/memberPhotoUp/${member.mphoto }"></li>
+					<li><a href="${conPath }/logout.do">LOGOUT</a></li>
+					<li class="long_text"><a href="${conPath }/memberModifyView.do">MODIFY</a></li>
 				</c:if>
 				<c:if test="${not empty admin }">
-					<li><a href="${conPath }/logout.do">관리자모드 끝내기</a></li>
-					<li><span>${admin.aname } 관리자님</span></li>
+					<li><a href="${conPath }/logout.do">LOGOUT</a></li>
+					<li><span>ADMIN MODE</span></li>
+				</c:if>
+			</ul>
+		</div>
+		<div id="bottom_nav">
+			<ul>
+				<li><a href="${conPath }/spotList.do">TRAVEL SPOT</a></li>
+				<c:if test="${empty admin }">
+					<li><a href="${conPath }/routeMakeView.do">PLANING</a></li>
+					<li><a href="${conPath }/myRouteList.do">MY TRAVLE</a></li>
+				</c:if>
+				<li><a href="${conPath }/boardList.do">BOARD</a></li>
+				<c:if test="${not empty admin }">
+					<li><a href="${conPath }/memberList.do">MEMBER LIST</a></li>
+					<li><a href="${conPath }/adminList.do">ADMIN LIST</a></li>						
 				</c:if>
 			</ul>
 		</div>

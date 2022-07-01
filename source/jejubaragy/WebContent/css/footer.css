@@ -1,25 +1,25 @@
 @charset "UTF-8";
 footer{
-	width : 75%;
-	margin : 0 auto;
+	width : 100%;
+	font-weight: 100;
 	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 300;
-	background-color : #B4C6A6;
 }
 footer ul{
-	width : 80%;
+	width : 90%;
 	margin : 0px auto;
-	padding : 20px 0 20px 20px;
+	text-align : right;
+	padding : 20px;
 }
 footer ul li{
 	list-style : none;
-	color : white;
+	color : #66806A;
 }
 footer ul li a{
+	color : #66806A;
 	text-decoration : none;
-	color : white;
+	background-color : #FFF1AF;
 }
 footer ul li a:hover{
 	color : #FFC286;
-	font-weight: 400;
+	font-weight: 300;
 }

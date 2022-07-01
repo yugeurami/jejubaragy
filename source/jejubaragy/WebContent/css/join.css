@@ -1,7 +1,68 @@
 @charset "UTF-8";
-.red{
+#join{
+	width : 70%;
+	margin : 0px auto;
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+#join table{
+	width : 50%;
+	margin : 210px auto;
+	padding : 50px 50px 50px 50px;
+	background-color : #B4C6A6;
+	border : 1px solid #B4C6A6;
+	border-radius : 30px;
+	box-shadow: 8px 5px 5px grey;
+}
+#join table tr{
+	height : 40px;
+}
+#join table th{
+	width : 30%;
+	color : #66806A;
+	font-size : 16px;
+	font-weight : 500;
+	text-align : right;
+	padding-right : 5px;
+}
+#join table .check{
+	height : 16px;
+}
+#join table .check td div{
+	font-size : 16px;
+	font-weight : 100px;
+}
+#join table .check td .red{
 	color : red;
 }
-.blue{
+#join table .check td .blue{
 	color : blue;
+}
+#join table tr td input{
+	width : 60%;
+	height : 25px;
+	border : 1px solid #B4C6A6;
+	outline-color: #B4C6A6;
+}
+#join table tr td #idChk{
+	width : 25%;
+	height : 30px;
+	color : white;
+	font-size : 15px;
+	font-weight : 400;
+	text-align : center;
+	border-radius : 10px;
+	background-color : #66806A;
+}
+#join table .button{
+	text-align : right;
+}
+#join table .button input{
+	width : 10%;
+	height : 45px;
+	color : white;
+	font-size : 16px;
+	font-weight : 400;
+	text-align : center;
+	border-radius : 10px;
+	background-color : #66806A;
 }
