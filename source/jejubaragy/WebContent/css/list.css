@@ -1,0 +1,70 @@
+@charset "UTF-8";
+*{
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+#main{
+	width : 60%;
+	position : absolute;
+	top : 100px;
+	right : 180px;
+	background-color: #B4C6A6;
+	box-shadow: 8px 5px 5px grey;
+	border-radius : 20px 20px 20px 20px;
+}
+#main #list{
+	width : 90%;
+	margin : 0 auto;
+}
+#main #list caption{
+	color : white;
+	font-size : 45px;
+	font-weight: 700;
+	margin : 15px;
+}
+#main #list tr{
+	overflow: hidden;
+}
+#main #list tr td{
+	overflow: hidden;
+}
+#main #list tr td .trs{
+	margin : 20px;
+}
+#main #list tr td:hover{
+	background-color: #66806A;
+	border-radius : 20px 20px 20px 20px;
+}
+#main #list tr td:hover .info span{
+	color : white;
+}
+#main #list tr td .trs img{
+	width : 100px;
+	higth : 100px;
+	float: left;
+	margin-bottom: 20px;
+}
+#main #list tr td .trs .info{
+	float: left;
+	margin : 10px;
+}
+#main #list tr td .trs .info .title{
+	font-size : 25px;
+	font-weight: 500;
+}
+#main #list tr td .trs .info .writer{
+	font-size : 20px;
+	font-weight: 500;
+}
+#main #list tr td .trs .info .bhit{
+	font-size : 14px;
+	font-weight: 300;
+}
+#main #list tr td .trs .info .rdate{
+	font-size : 13px;
+	font-weight: 100;
+}
+#main .paging{
+	width : 90%;
+	margin : 0 auto;
+	text-align: center;
+}

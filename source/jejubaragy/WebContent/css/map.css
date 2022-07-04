@@ -8,20 +8,20 @@
 	top : 80px;
 	right : 100px;
 }
-#main #ccode{
+#main #code{
 	height : 55px;
 }
-#main #ccode ul{
+#main #code ul{
 	overflow : hidden;	
 }
-#main #ccode ul li{
-	width : 8%;
+#main #code ul li{
+	width : 15%;
 	float : left;
 	list-style : none;
 }
-#main #ccode ul li a{
-	height : 40px;
+#main #code ul li a{
 	display : block;
+	text-align:center;
 	border-bottom : none;
 	text-decoration : none;
 	border-radius : 20px 20px 0 0;
@@ -29,23 +29,23 @@
 	font-size : 1.1em;
 	font-weight : 300;
 	margin-top : 15px;
+	line-height : 40px;
 	background-color : #66806A;
 	color : white;
 }
-#main #ccode ul li .unselected {
-	height : 40px;
+#main #code ul li .selected{
+	height : 45px;
+	color : #66806A;
 	display : block;
-	border-bottom : none;
-	border-radius : 20px 20px 0 0;
-	border-color : #66806A;
-	font-size : 1.1em;
-	font-weight : 300;
-	margin-top : 15px;
-	background-color : #66806A;
-	color : white;	
+	text-align:center;
+	margin-top : 10px;
+	font-weight : 400;
+	font-size : 1.15em;
+	border-color : #B4C6A6;
+	background-color : #B4C6A6;
+	box-shadow: 8px -3px 8px grey;
 }
-
-#main #ccode ul li a:hover{
+#main #code ul li a:hover{
 	height : 45px;
 	color : #66806A;
 	display : block;
@@ -61,7 +61,7 @@
 	overflow : hidden;
 	background-color : #B4C6A6;
 	box-shadow: 8px 5px 5px grey;
-	border-radius : 0px 20px 20px 20px;
+	border-radius : 20px 20px 20px 20px;
 }
 .main_wrap .wrap{
 	float : left;
@@ -184,15 +184,4 @@
 	 width:150px;
 	 text-align:center;
 	 padding:0;
-}
-.selected{
-	height : 45px;
-	color : #66806A;
-	display : block;
-	margin-top : 10px;
-	font-weight : 400;
-	font-size : 1.15em;
-	border-color : #B4C6A6;
-	background-color : #B4C6A6;
-	box-shadow: 8px -3px 8px grey;
 }

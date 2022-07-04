@@ -1,12 +1,12 @@
 @charset "UTF-8";
 #login{
 	position : relative;
-	width : 75%;
+	width : 20%;
 	margin : 0px auto;
 	font-family: 'Noto Sans KR', sans-serif;
 }
 #login table{
-	width : 30%;
+	width : 100%;
 	margin : 210px auto;
 	padding : 50px 50px 50px 50px;
 	background-color : #B4C6A6;
@@ -46,8 +46,6 @@
 	text-align : center;
 	border-radius : 10px;
 	background-color : #66806A;
-}
-#login table tr #button input:hover{
 }
 #login table .join td{
 	text-align : right;

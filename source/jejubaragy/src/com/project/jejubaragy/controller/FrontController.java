@@ -13,6 +13,8 @@ import com.project.jejubaragy.service.AdminIdCheckService;
 import com.project.jejubaragy.service.AdminJoinService;
 import com.project.jejubaragy.service.AdminListService;
 import com.project.jejubaragy.service.AdminLoginService;
+import com.project.jejubaragy.service.BoardBestListService;
+import com.project.jejubaragy.service.BoardContentService;
 import com.project.jejubaragy.service.LogoutService;
 import com.project.jejubaragy.service.MemberDownListService;
 import com.project.jejubaragy.service.MemberDownService;
@@ -24,7 +26,11 @@ import com.project.jejubaragy.service.MemberModifyService;
 import com.project.jejubaragy.service.MemberUpService;
 import com.project.jejubaragy.service.Service;
 import com.project.jejubaragy.service.SpotListService;
-import com.project.jejubaragy.service.boardListService;
+import com.project.jejubaragy.service.BoardListService;
+import com.project.jejubaragy.service.BoardModifyService;
+import com.project.jejubaragy.service.BoardWriteService;
+import com.project.jejubaragy.service.CommentsGetService;
+import com.project.jejubaragy.service.CommentsModifyService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -139,9 +145,45 @@ public class FrontController extends HttpServlet {
 			service.execute(request, response);
 			viewPage = "spot/spotList.jsp";
 		}else if(command.equals("/boardList.do")) {
-			service = new boardListService();
+			service = new BoardListService();
 			service.execute(request, response);
 			viewPage = "board/boardList.jsp";
+		}else if(command.equals("/boardWriteView.do")) {
+			readPage = true;
+			viewPage = "board/boardWrite.jsp";
+		}else if(command.equals("/boardWrite.do")) {
+			if(readPage) {
+				service = new BoardWriteService();
+				service.execute(request, response);
+			}
+			viewPage = "board/boardList.do";
+		}else if(command.equals("/boardContent.do")) {
+			service = new BoardContentService();
+			service.execute(request, response);
+			viewPage = "board/boardContent.jsp";
+		}else if(command.equals("/boardModifyView.do")) {
+			readPage = true;
+			service = new BoardContentService();
+			service.execute(request, response);
+			viewPage = "board/boardModify.jsp";
+		}else if(command.equals("/boardModify.do")) {
+			if(readPage) {
+				service = new BoardModifyService();
+				service.execute(request, response);
+			}
+			viewPage = "board/boardContent.do";
+		}else if(command.equals("/commentsModifyView.do")) {
+			service = new CommentsGetService();
+			service.execute(request, response);
+			viewPage = "comments/commentsModify.jsp";
+		}else if(command.equals("/commentsModify.do")) {
+			service = new CommentsModifyService();
+			service.execute(request, response);
+			viewPage = "board/boardContent.do";
+		}else if(command.equals("/boardBest.do")) {
+			service = new BoardBestListService();
+			service.execute(request, response);
+			viewPage = "main.do";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

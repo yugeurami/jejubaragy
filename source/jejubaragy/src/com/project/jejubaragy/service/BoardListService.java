@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.project.jejubaragy.dao.BoardDao;
 
-public class boardListService implements Service {
+public class BoardListService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -15,7 +15,7 @@ public class boardListService implements Service {
 			pageNum = "1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE = 15;
+		final int PAGESIZE = 12;
 		final int BLOCKSIZE = 10;
 		int startRow = (currentPage - 1) * PAGESIZE + 1; 
 		int endRow = startRow + PAGESIZE - 1;

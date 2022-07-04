@@ -11,6 +11,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="${conPath }/css/list.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -21,21 +22,45 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<table>
-			<caption>자유 게시판</caption>
+		<table id="list">
+			<caption>TRAVEL BOARD</caption>
 			<c:if test="${boardList.size() eq 0 }">
-				<tr><td colspan="5">등록된 글이 없습니다</td></tr>
+				<tr><td colspan="2">등록된 글이 없습니다</td></tr>
 			</c:if>
 			<c:if test="${boardList.size() != null }">
-				<c:forEach var="board" items="${boardList }">
-					<tr onclick="location.href='${conPath }/boardContent.do?bid=${board.bid}&pageNum=${pageNum }'">
-						<td>
-							<img alt="대표사진" src="${conPath }/boardPhotoUp/${board.bmainphoto"><br>
-							<span class="title">${board.btitle }</span><br>
-							<span class="writer">${board.bwriter }</span>
+				<tr>
+					<c:set var="cnt" value="0"/>
+					<c:forEach var="board" items="${boardList }">
+						<c:set var="cnt" value="${cnt+1 }"/>
+						<td onclick="location.href='${conPath }/boardContent.do?bnum=${board.bnum }&pageNum=${pageNum }'">
+							<div class="trs">
+								<c:if test="${board.bmainphoto != null }">
+									<img alt="대표사진" src="${conPath }/boardPhotoUp/${board.bmainphoto }"><br>
+								</c:if>
+								<c:if test="${board.bmainphoto == null }">
+									<img alt="대표사진" src="${conPath }/boardPhotoUp/noImg.jpg">
+								</c:if>
+								<div class="info">
+									<span class="title">${board.btitle }</span><br>
+									<span class="writer">${board.bwriter }</span><br>
+									<span class="bhit">VIEW | ${board.bhit }</span><br>
+									<span class="rdate">${board.brdate }</span>
+								</div>
+							</div>
 						</td>
-					</tr>
+					<c:if test="${cnt % 4 == 0 }">
+						</tr>
+						<tr>
+					</c:if>
 				</c:forEach>
+				</tr>
+			</c:if>
+			<c:if test="${not empty admin || not empty member }">
+				<tr>
+					<td colspan="2">
+						<input type="button" value="WRITE" onclick="location.href='${conPath}/boardWriteView.do?pageNum=${pageNum }'">
+					</td>
+				</tr>
 			</c:if>
 		</table>
 		<div class="paging">

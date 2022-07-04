@@ -12,24 +12,13 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<link href="${conPath }/css/header.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			$('#down').click(function(){
-				var check = confirm('정말 탈퇴하시겠습니까?');
-				if(check){
-					location.href="${conPath}/memberDelete.do";
-				}
-			});
-		});
-	</script>
 </head>
 <body>
 	<header>
 		<div id="logo">
 			<div class="logoImg">
 				<a href="${conPath }/main.do">
-					<img alt="로고" src="https://via.placeholder.com/300x200">
+					<img alt="로고" src="${conPath }/img/로고.png">
 				</a>
 			</div>
 		</div>

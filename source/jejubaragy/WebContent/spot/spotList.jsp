@@ -8,32 +8,42 @@
 <head>
 	<meta charset="UTF-8">
 	<title>제주바라기:여행지</title>
-	<link href="${conPath }/css/map.css" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="${conPath }/css/map.css" rel="stylesheet">
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('#main #ccode ul li a').click(function(){
-				$('#main #ccode ul li a').addClass('unselected');
-				$(this).addClass('selected');
-			});
+			var code = '${param.ccode}';
+			if(code == 'AT4'){
+				$('#AT4').addClass('selected');
+			}else if(code == 'CT1'){
+				$('#CT1').addClass('selected');
+			}else if(code == 'AD5'){
+				$('#AD5').addClass('selected');
+			}else if(code == 'FD6'){
+				$('#FD6').addClass('selected');
+			}else if(code == 'CE7'){
+				$('#CE7').addClass('selected');
+			}else{
+				$('#ALL').addClass('selected');
+			}
 		});
 	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<div id="ccode">
+		<div id="code">
 			<ul>
-				<li><a href="${conPath }/spotList.do">ALL</a></li>
-				<li><a href="${conPath }/spotList.do?ccode='AT4'" id="AT4">ATTRACTION</a></li>
-				<li><a href="${conPath }/spotList.do?ccode='CT1'" id="CT1">CULTURAL FACILITIES</a></li>
-				<li><a href="${conPath }/spotList.do?ccode='AD5'" id="AT4">ACCOMMODATION</a></li>
-				<li><a href="${conPath }/spotList.do?ccode='FD6'" id="FD6">RESTAURANT</a></li>
-				<li><a href="${conPath }/spotList.do?ccode='CE7'" id="CE7">CAFE</a></li>
+				<li><a href="${conPath }/spotList.do" id="ALL">ALL</a></li>
+				<li><a href="${conPath }/spotList.do?ccode=AT4" id="AT4">ATTRACTION</a></li>
+				<li><a href="${conPath }/spotList.do?ccode=CT1" id="CT1">CULTURAL FACILITIES</a></li>
+				<li><a href="${conPath }/spotList.do?ccode=AD5" id="AD5">ACCOMMODATION</a></li>
+				<li><a href="${conPath }/spotList.do?ccode=FD6" id="FD6">RESTAURANT</a></li>
+				<li><a href="${conPath }/spotList.do?ccode=CE7" id="CE7">CAFE</a></li>
 			</ul>
 		</div>
 		<div class="main_wrap">
@@ -51,7 +61,7 @@
 			<div id="spotlist">
 				<div id="search">
 					<form action="spotList.do" method="post">
-						<input type="hidden" name="ccode" value="${code }">
+						<input type="hidden" name="ccode" value="${ccode }">
 						<input type="text" name="search" value="${search }">
 						<input type="submit">
 					</form>
@@ -124,10 +134,9 @@
 					
 					        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 							// 마커 이미지 변경하기
-					        var imageSrc = '이미지주소', // 마커이미지의 주소입니다    
-   								imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+					        var imageSrc = '${conPath }/img/지도핀.png', // 마커이미지의 주소입니다    
+   								imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
     							imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-					        
     						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
     							
 					        // 결과값으로 받은 위치를 마커로 표시합니다

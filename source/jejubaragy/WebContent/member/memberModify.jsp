@@ -45,6 +45,12 @@
 					return false;
 				}
 			});
+			$('#down').click(function(){
+				var check = confirm('정말 탈퇴하시겠습니까?');
+				if(check){
+					location.href="${conPath}/memberDelete.do";
+				}
+			});
 		});
 	</script>
 </head>

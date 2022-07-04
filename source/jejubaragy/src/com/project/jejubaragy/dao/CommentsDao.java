@@ -63,8 +63,8 @@ public class CommentsDao {
 		return cnt;
 	}
 	
-	// 댓글 페이징
-	public ArrayList<CommentsDto> boardList(int bnum, int startRow, int endRow) {
+	// 댓글 리스트
+	public ArrayList<CommentsDto> CommentsList(int bnum) {
 		ArrayList<CommentsDto> commentslist = new ArrayList<CommentsDto>(); 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -74,14 +74,11 @@ public class CommentsDao {
 				"                FROM ( SELECT * " + 
 				"                            FROM COMMENTS" + 
 				"                            WHERE BNUM = ?" + 
-				"                            ORDER BY CGROUP DESC, CSTEP) A )" + 
-				"    WHERE RN BETWEEN ? AND ?";
+				"                            ORDER BY CGROUP DESC, CSTEP) A )";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bnum);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int cid = rs.getInt("cid");
@@ -110,6 +107,45 @@ public class CommentsDao {
 			}
 		}
 		return commentslist;
+	}
+	public CommentsDto CommentsGet(int cid) {
+		CommentsDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM COMMENTS WHERE CID = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String mid = rs.getString("mid");
+				String aid = rs.getString("aid");
+				String cwriter = rs.getString("cwriter");
+				String cphoto = rs.getString("cphoto");
+				int bnum = rs.getInt("bnum");
+				String ccontent = rs.getString("ccontent");
+				int cgroup = rs.getInt("cgroup");
+				int cstep = rs.getInt("cstep");
+				int cindent = rs.getInt("cindent");
+				Date crdate = rs.getDate("crdate");
+				String cip = rs.getString("cip");
+				dto = new CommentsDto(cid, mid, aid, cwriter, cphoto, bnum, ccontent, 
+						cgroup, cstep, cindent, crdate, cip));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		return dto;
 	}
 		
 	// 댓글 작성

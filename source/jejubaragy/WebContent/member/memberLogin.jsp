@@ -8,15 +8,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회원 로그인 페이지</title>
-	<c:if test="${not empty admin || not empty member }">
-		<script>
-			location.href="${conPath}/main.do";
-		</script>
-	</c:if>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 	<link href="${conPath }/css/login.css" rel="stylesheet">
+	<c:if test="${not empty admin || not empty member }">
+		<script>
+			location.href="${conPath }/main.do";
+		</script>
+	</c:if>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>

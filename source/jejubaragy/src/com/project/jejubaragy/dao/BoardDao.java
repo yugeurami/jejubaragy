@@ -296,12 +296,13 @@ public class BoardDao {
 	}
 	
 	// 게시글 수정
-	public int boardModify(String btitle, String bcontent, String bmainphoto, int bnum ) {
+	public int boardModify(String btitle, int rnum, String bcontent, String bmainphoto, int bnum ) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE BOARD" + 
 				"    	SET BTITLE = ?," + 
+				"			 RNUM = ?," +
 				"          BCONTENT = ?," + 
 				"          BMAINPHOTO = ?" + 
 				"   	WHERE BNUM = ?";

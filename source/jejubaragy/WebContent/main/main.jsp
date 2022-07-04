@@ -43,7 +43,12 @@
 		<div id="best_wrap">
 			<div class="best">
 				<c:forEach var="best" items="${best }">
-					<img alt="베스트글사진" src="${conPath }/boardPhotoUP/${best.mainphoto }">
+					<c:if test="${best.bmainphoto != null }">
+						<img alt="베스트글사진" src="${conPath }/boardPhotoUp/${best.bmainphoto }">
+					</c:if>
+					<c:if test="${best.bmainphoto == null }">
+						<img alt="베스트임시글사진" src="${conPath }/boardPhotoUp/noImg.jpg">
+					</c:if>
 					<p class="btitle">${best.btitle }</p>
 				</c:forEach>
 			</div>

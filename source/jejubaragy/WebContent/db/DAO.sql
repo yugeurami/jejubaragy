@@ -102,11 +102,66 @@ DELETE FROM SPOT WHERE SID = 7912085;
 
 
 -- ROUTE / DETAILROUTE / STORAGE -- 
--- 루트 목록
+-- 내 루트 목록(페이징)
+SELECT *
+    FROM (SELECT ROWNUM RN, A.*
+                FROM (SELECT *
+                            FROM ROUTE 
+                            WHERE MID = 'aaa'
+                            ORDER BY RSTARTDATE DESC)  A )
+    WHERE RN BETWEEN 1 AND 10;
+
+-- 전체 공개 루트 목록(페이징)
+SELECT *
+    FROM (SELECT ROWNUM RN, A.*
+                FROM (SELECT R.*, MNAME 
+                            FROM ROUTE R, MEMBER M  
+                            WHERE R.MID=M.MID AND RPRIVATE = 1 
+                            ORDER BY RNUM DESC)  A )
+    WHERE RN BETWEEN 1 AND 10;
+
 -- 루트 생성
+INSERT INTO ROUTE(RNUM, RNAME, MID, RSTARTDATE, RENDDATE, RPRIVATE)
+                VALUES(ROUTE_SEQ.NEXTVAL, '제주도 첫 여행', 'aaa', '2022-10-10', '2022-10-15' , 1);
+                
 -- 루트 수정
--- 루트 저장
+UPDATE ROUTE 
+    SET RNAME = '제주도 갑니다',
+          RSTARTDATE = '2022-10-11',
+          RENDDATE = '2022-10-15',
+          RPRIVATE = 1
+    WHERE RNUM = 1;
+    
+--루트 삭제
+DELETE FROM ROUTE WHERE RNUM = 1;
+
+-- 디테일 루트 보기
+SELECT D.*, SNAME FROM DETAILROUTE D, SPOT S
+    WHERE D.SID=S.SID AND RNUM = 1
+    ORDER BY DDATE, DSEQ;
+
+-- 디테일 루트 만들기(루트에 장소 추가하기)
+INSERT INTO DETAILROUTE(DNUM, RNUM, SID, DDATE, DSEQ)
+                VALUES(DETAILROUTE_SEQ.NEXTVAL, 1, 7912085, 1, 1);
+                
+-- 디테일 루트 수정
+UPDATE DETAILROUTE
+    SET DDATE = 0,
+          DSEQ = 0
+    WHERE DNUM = 1;
+    
+-- 디테일 루트 삭제
+DELETE FROM DETAILROUTE WHERE DNUM = 1;
+
+
 -- 타인 루트 저장
+INSERT INTO STORAGE(SNUM, MID, RNUM)
+                VALUES(STORAGE_SEQ.NEXTVAL, 'aaa', 2);
+                
+-- 타인 루트 삭제
+DELETE FROM STORAGE WHERE SNUM = 1;
+
+
 
 -- BOARD
 -- 총 게시글 수
@@ -133,6 +188,7 @@ SELECT * FROM BOARD WHERE BNUM = 1;
 -- 게시글 수정
 UPDATE BOARD
     SET BTITLE = '수정된 게시글',
+          RNUM = 1,
           BCONTENT = '수정했습니다',
           BMAINPHOTO = NULL
     WHERE BNUM = 2;
@@ -159,6 +215,7 @@ DELETE FROM BOARD WHERE BNUM = 1;
     
     
 -- COMMENTS
+SELECT * FROM COMMENTS;
 -- 해당 글의 댓글 갯수
 SELECT COUNT(*) CNT FROM COMMENTS WHERE BNUM = 1;
 -- 댓글 페이징
@@ -169,7 +226,8 @@ SELECT *
                             WHERE BNUM = 1
                             ORDER BY CGROUP DESC, CSTEP) A )
     WHERE RN BETWEEN 1 AND 10;                
-
+-- 댓글 가져오기
+SELECT * FROM COMMENTS WHERE CID=1;
 -- 댓글 작성
 INSERT INTO COMMENTS(CID, MID, AID, CWRITER, CPHOTO, BNUM, CCONTENT, CGROUP, CSTEP, CINDENT, CRDATE, CIP)
                     VALUES(COMMENTS_SEQ.NEXTVAL, NULL, 'admin', '관리자', NULL, 1, '글 작성 감사합니다', COMMENTS_SEQ.CURRVAL, 0, 0, SYSDATE, '127.00.001');
@@ -180,7 +238,7 @@ INSERT INTO COMMENTS(CID, MID, AID, CWRITER, CPHOTO, BNUM, CCONTENT, CGROUP, CST
         WHERE CGROUP = 1 AND CSTEP > 0 ;
     --대댓글 작성
     INSERT INTO COMMENTS(CID, MID, AID, CWRITER, CPHOTO, BNUM, CCONTENT, CGROUP, CSTEP, CINDENT, CRDATE, CIP)
-                    VALUES(COMMENTS_SEQ.NEXTVAL, NULL, 'admin', '관리자', NULL, 1, '글 작성 감사합니다', COMMENTS_SEQ.CURRVAL, 1, 1, SYSDATE, '127.00.001');
+                    VALUES(COMMENTS_SEQ.NEXTVAL, NULL, 'admin', '관리자', NULL, 1, '글 작성 감사합니다', 1, 1, 1, SYSDATE, '127.00.001');
 
 -- 댓글 수정
 UPDATE COMMENTS
