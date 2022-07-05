@@ -17,10 +17,16 @@
 	<header>
 		<div id="logo">
 			<div class="logoImg">
-				<a href="${conPath }/main.do">
+				<a href="${conPath }/boardBest.do">
 					<img alt="로고" src="${conPath }/img/로고.png">
 				</a>
 			</div>
+			<c:if test="${not empty member }">
+				<div class="name">${member.mname }</div>
+			</c:if>
+			<c:if test="${not empty admin }">
+				<div class="name">ADMIN MODE</div>
+			</c:if>
 		</div>
 		<div id="top_nav">
 			<ul class="right">
@@ -30,26 +36,26 @@
 				</c:if>
 				<c:if test="${not empty member }">
 					<li><a href="${conPath }/logout.do">LOGOUT</a></li>
-					<li class="long_text"><a href="${conPath }/memberModifyView.do">MODIFY</a></li>
+					<li><a href="${conPath }/memberModifyView.do">MODIFY</a></li>
 				</c:if>
 				<c:if test="${not empty admin }">
 					<li><a href="${conPath }/logout.do">LOGOUT</a></li>
-					<li><span>ADMIN MODE</span></li>
 				</c:if>
 			</ul>
 		</div>
 		<div id="bottom_nav">
 			<ul>
-				<li><a href="${conPath }/spotList.do">TRAVEL SPOT</a></li>
+				<c:if test="${not empty admin }">
+					<li><a href="${conPath }/adminList.do">ADMIN LIST</a></li>						
+					<li><a href="${conPath }/memberList.do">MEMBER LIST</a></li>
+				</c:if>
 				<c:if test="${empty admin }">
 					<li><a href="${conPath }/routeMakeView.do">PLANING</a></li>
 					<li><a href="${conPath }/myRouteList.do">MY TRAVLE</a></li>
 				</c:if>
+				<li><a href="${conPath }/spotList.do">TRAVEL SPOT</a></li>
+				<li><a href="${conPath }/routeList.do">TRAVEL ROUTE</a></li>
 				<li><a href="${conPath }/boardList.do">BOARD</a></li>
-				<c:if test="${not empty admin }">
-					<li><a href="${conPath }/memberList.do">MEMBER LIST</a></li>
-					<li><a href="${conPath }/adminList.do">ADMIN LIST</a></li>						
-				</c:if>
 			</ul>
 		</div>
 	</header>

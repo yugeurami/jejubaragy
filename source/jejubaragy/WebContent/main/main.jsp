@@ -11,6 +11,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;&display=swap" rel="stylesheet">
+	<link href="${conPath }/css/best.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -41,19 +42,27 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
 		<div id="best_wrap">
-			<div class="best">
-				<c:forEach var="best" items="${best }">
-					<c:if test="${best.bmainphoto != null }">
-						<img alt="베스트글사진" src="${conPath }/boardPhotoUp/${best.bmainphoto }">
-					</c:if>
-					<c:if test="${best.bmainphoto == null }">
-						<img alt="베스트임시글사진" src="${conPath }/boardPhotoUp/noImg.jpg">
-					</c:if>
-					<p class="btitle">${best.btitle }</p>
-				</c:forEach>
-			</div>
+			<c:forEach var="best" items="${best }">
+				<div class="best">
+					<div class="photo">
+						<c:if test="${best.bmainphoto != null }">
+							<img alt="베스트글사진" src="${conPath }/boardPhotoUp/${best.bmainphoto }"
+								onclick="location.href='${conPath }/boardContent.do?bnum=${best.bnum }'">
+						</c:if>
+						<c:if test="${best.bmainphoto == null }">
+							<img alt="베스트임시글사진" src="${conPath }/boardPhotoUp/noImg.jpg"
+								onclick="location.href='${conPath }/boardContent.do?bnum=${best.bnum }'">
+						</c:if>
+					</div>
+					<div class="text_box"></div>
+					<div class="text">
+						<span class="btitle">${best.btitle }</span><br>
+						<span class="bwriter">${best.bwriter }</span>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
+		<jsp:include page="../main/footer.jsp"/>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -24,6 +24,8 @@ import com.project.jejubaragy.service.MemberListService;
 import com.project.jejubaragy.service.MemberLoginService;
 import com.project.jejubaragy.service.MemberModifyService;
 import com.project.jejubaragy.service.MemberUpService;
+import com.project.jejubaragy.service.MyRouteListService;
+import com.project.jejubaragy.service.RouteListService;
 import com.project.jejubaragy.service.Service;
 import com.project.jejubaragy.service.SpotListService;
 import com.project.jejubaragy.service.BoardListService;
@@ -31,6 +33,8 @@ import com.project.jejubaragy.service.BoardModifyService;
 import com.project.jejubaragy.service.BoardWriteService;
 import com.project.jejubaragy.service.CommentsGetService;
 import com.project.jejubaragy.service.CommentsModifyService;
+import com.project.jejubaragy.service.CommentsReplyService;
+import com.project.jejubaragy.service.CommnetsWriteService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -63,7 +67,7 @@ public class FrontController extends HttpServlet {
 				service.execute(request, response);
 				readPage = false;
 			}
-			viewPage = "main.do";
+			viewPage = "boardBest.do";
 		}else if(command.equals("/adminList.do")) {
 			service = new AdminListService();
 			service.execute(request, response);
@@ -93,7 +97,7 @@ public class FrontController extends HttpServlet {
 		}else if(command.equals("/logout.do")) {
 			service = new LogoutService();
 			service.execute(request, response);
-			viewPage = "main.do";
+			viewPage = "boardBest.do";
 		}else if(command.equals("/memberLoginView.do")) {
 			readPage = true;
 			viewPage = "member/memberLogin.jsp";
@@ -103,7 +107,7 @@ public class FrontController extends HttpServlet {
 				service.execute(request, response);
 				readPage = false;
 			}
-			viewPage = "main.do";
+			viewPage = "boardBest.do";
 		}else if(command.equals("/memberJoinView.do")) {
 			readPage = true;
 			viewPage = "member/memberJoin.jsp";
@@ -127,7 +131,7 @@ public class FrontController extends HttpServlet {
 				service.execute(request, response);
 				readPage = false;
 			}
-			viewPage = "main.do";
+			viewPage = "boardBest.do";
 		}else if(command.equals("/memberDown.do")) {
 			service = new MemberDownService();
 			service.execute(request, response);
@@ -156,7 +160,7 @@ public class FrontController extends HttpServlet {
 				service = new BoardWriteService();
 				service.execute(request, response);
 			}
-			viewPage = "board/boardList.do";
+			viewPage = "boardList.do";
 		}else if(command.equals("/boardContent.do")) {
 			service = new BoardContentService();
 			service.execute(request, response);
@@ -171,7 +175,7 @@ public class FrontController extends HttpServlet {
 				service = new BoardModifyService();
 				service.execute(request, response);
 			}
-			viewPage = "board/boardContent.do";
+			viewPage = "boardContent.do";
 		}else if(command.equals("/commentsModifyView.do")) {
 			service = new CommentsGetService();
 			service.execute(request, response);
@@ -179,11 +183,27 @@ public class FrontController extends HttpServlet {
 		}else if(command.equals("/commentsModify.do")) {
 			service = new CommentsModifyService();
 			service.execute(request, response);
-			viewPage = "board/boardContent.do";
+			viewPage = "boardContent.do";
 		}else if(command.equals("/boardBest.do")) {
 			service = new BoardBestListService();
 			service.execute(request, response);
 			viewPage = "main.do";
+		}else if(command.equals("/commentsWrite.do")) {
+			service = new CommnetsWriteService();
+			service.execute(request, response);
+			viewPage = "boardContent.do";
+		}else if(command.equals("/commentsReply.do")) {
+			service = new CommentsReplyService();
+			service.execute(request, response);
+			viewPage = "boardContent.do";
+		}else if(command.equals("/myRouteList.do")) {
+			service = new MyRouteListService();
+			service.execute(request, response);
+			viewPage = "route/myRouteList.jsp";
+		}else if(command.equals("/routeList.do")) {
+			service = new RouteListService();
+			service.execute(request, response);
+			viewPage = "route/routeList.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

@@ -22,62 +22,62 @@
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<table id="list">
-			<caption>TRAVEL BOARD</caption>
-			<c:if test="${boardList.size() eq 0 }">
-				<tr><td colspan="2">등록된 글이 없습니다</td></tr>
-			</c:if>
-			<c:if test="${boardList.size() != null }">
-				<tr>
-					<c:set var="cnt" value="0"/>
-					<c:forEach var="board" items="${boardList }">
-						<c:set var="cnt" value="${cnt+1 }"/>
-						<td onclick="location.href='${conPath }/boardContent.do?bnum=${board.bnum }&pageNum=${pageNum }'">
-							<div class="trs">
-								<c:if test="${board.bmainphoto != null }">
-									<img alt="대표사진" src="${conPath }/boardPhotoUp/${board.bmainphoto }"><br>
-								</c:if>
-								<c:if test="${board.bmainphoto == null }">
-									<img alt="대표사진" src="${conPath }/boardPhotoUp/noImg.jpg">
-								</c:if>
-								<div class="info">
-									<span class="title">${board.btitle }</span><br>
-									<span class="writer">${board.bwriter }</span><br>
-									<span class="bhit">VIEW | ${board.bhit }</span><br>
-									<span class="rdate">${board.brdate }</span>
+		<div id="main_wrap">
+			<table id="list">
+				<caption>TRAVEL BOARD</caption>
+				<c:if test="${boardList.size() eq 0 }">
+					<tr><td colspan="2">등록된 글이 없습니다</td></tr>
+				</c:if>
+				<c:if test="${boardList.size() != null }">
+					<tr>
+						<c:set var="cnt" value="0"/>
+						<c:forEach var="board" items="${boardList }">
+							<c:set var="cnt" value="${cnt+1 }"/>
+							<td onclick="location.href='${conPath }/boardContent.do?bnum=${board.bnum }&pageNum=${pageNum }'">
+								<div class="trs">
+									<c:if test="${board.bmainphoto != null }">
+										<img alt="대표사진" src="${conPath }/boardPhotoUp/${board.bmainphoto }"><br>
+									</c:if>
+									<c:if test="${board.bmainphoto == null }">
+										<img alt="대표사진" src="${conPath }/boardPhotoUp/noImg.jpg">
+									</c:if>
+									<div class="info">
+										<span class="title">${board.btitle }</span><br>
+										<span class="writer">${board.bwriter }</span><br>
+										<span class="bhit">VIEW | ${board.bhit }</span><br>
+										<span class="rdate">${board.brdate }</span>
+									</div>
 								</div>
-							</div>
-						</td>
-					<c:if test="${cnt % 4 == 0 }">
-						</tr>
-						<tr>
+							</td>
+						<c:if test="${cnt % 4 == 0 }">
+							</tr>
+							<tr>
+						</c:if>
+					</c:forEach>
+					</tr>
+				</c:if>
+			</table>
+			<div id="button">
+				<c:if test="${not empty admin || not empty member }">
+					<input type="button" value="WRITE" onclick="location.href='${conPath}/boardWriteView.do?pageNum=${pageNum }'">
+				</c:if>
+			</div>
+			<div class="paging">
+				<c:if test="${startPage > BLOCKSIZE }">
+					<a href="${conPath }/boardList.do?pageNum=${startPage-1 }">[ 이전 ]</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<c:if test="${i eq pageNum }">
+						[ <b>${i }</b> ]
+					</c:if>
+					<c:if test="${i != pageNum }">
+						<a href="${conPath }/boardList.do?pageNum=${i}">[ ${i } ]</a>
 					</c:if>
 				</c:forEach>
-				</tr>
-			</c:if>
-			<c:if test="${not empty admin || not empty member }">
-				<tr>
-					<td colspan="2">
-						<input type="button" value="WRITE" onclick="location.href='${conPath}/boardWriteView.do?pageNum=${pageNum }'">
-					</td>
-				</tr>
-			</c:if>
-		</table>
-		<div class="paging">
-			<c:if test="${startPage > BLOCKSIZE }">
-				<a href="${conPath }/boardList.do?pageNum=${startPage-1 }">[ 이전 ]</a>
-			</c:if>
-			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<c:if test="${i eq pageNum }">
-					[ <b>${i }</b> ]
+				<c:if test="${ endPage < pageCnt }">
+					<a href="${conPath }/boardList.do?pageNum=${endPage + 1 }">[ 다음 ]</a>
 				</c:if>
-				<c:if test="${i != pageNum }">
-					<a href="${conPath }/boardList.do?pageNum=${i}">[ ${i } ]</a>
-				</c:if>
-			</c:forEach>
-			<c:if test="${ endPage < pageCnt }">
-				<a href="${conPath }/boardList.do?pageNum=${endPage + 1 }">[ 다음 ]</a>
-			</c:if>
+			</div>
 		</div>
 		<jsp:include page="../main/footer.jsp"/>
 	</div>

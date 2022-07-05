@@ -7,6 +7,9 @@
 	position : absolute;
 	top : 100px;
 	right : 180px;
+}
+#main #main_wrap{
+	width : 100%;
 	background-color: #B4C6A6;
 	box-shadow: 8px 5px 5px grey;
 	border-radius : 20px;
@@ -14,12 +17,14 @@
 }
 #main #content{
 	width : 60%;
-	margin : 20px;
 	float : left;
-	background-color : white;
-	border-radius : 20px;
+	margin : 20px;
+}
+#main #content tr td{
+	padding : 0 0 0 20px;
 }
 #main #content .big td{
+	padding-top: 20px;
 	font-size: 30px;
 	font-weight: 700;
 }
@@ -31,61 +36,87 @@
 	font-size: 14px;
 	font-weight: 300;
 }
+#main #content .brdate td{
+	padding-bottom: 20px;
+}
 #main #content .content td{
 	height : 600px;
 	font-size: 18px;
 	font-weight: 300;
+	background-color : white;
+	border-radius : 20px;
 	overflow : scroll;
 	overflow-x : hidden;
 }
 #main #content .content td::-webkit-scrollbar{
-	width : 15px;
+	width : 20px;
 }
 #main #content .content td::-webkit-scrollbar-thumb{
 	background-color : #FFF1AF;
 }
 #main #content .content td::-webkit-scrollbar-track{
+	height : 100%;
 	background-color : #66806A;
+	border-radius : 0 20px 20px 0;
 }
 #main #commentsList{
-	width : 30%;
+	width : 35%;
+	height : 660px;
 	float : left;
-	margin : 20px;
-}
-#main #commentsList textarea{
-	width : 80%;
-	height : 50px;
-}
-#main #commentsList input[type='submit']{
-	width : 15%;
-	height : 50px;
 }
 #main #commentsList .comment{
+	margin-top : 50px;
+	height : 100%;
 	overflow : scroll;
 	overflow-x : hidden;
 }
-#main #commentsList .comment p{
-	overflow: hidden;
+#main #commentsList .comment .one{
+	width : 100%;
+	position : relative;
+	margin-bottom : 10px; 
+	border-radius : 20px 0 0 20px;
+	border : 5px solid #66806A;
 }
-#main #commentsList .comment p img{
+#main #commentsList .comment div img{
 	width : 80px;
-	float : left;
 	border-radius: 80px;
+	margin : 10px;
 }
-#main #commentsList .comment p .text{
-	float : left;
+#main #commentsList .comment div .text{
+	width : 75%;
+	height : 80px;
+	position: absolute;
+	top : 20px;
+	left : 100px;
 }
-#main #commentsList .comment p .text .cwriter{
+#main #commentsList .comment div .text .cwriter{
 	font-size: 20px;
 	font-weight: 500;
 }
-#main #commentsList .comment p .text .ccontent{
+#main #commentsList .comment div .text .ccontent{
 	font-size: 18px;
 	font-weight: 300;
 }
-#main #commentsList .comment p button{
-	background-color : #B4C6A6;
-	float: right;
+#main #commentsList .comment div button{
+	height : 25px;
+	background-color : #66806A;
+	color : white;
+	border : none;
+}
+#main #commentsList .comment div .reply{
+	position: absolute;
+	top : 38px;
+	right : 30px;
+}
+#main #commentsList .comment div .modify{
+	position: absolute;
+	top : 8px;
+	right : 100px;
+}
+#main #commentsList .comment div .delete{
+	position: absolute;
+	top : 8px;
+	right : 30px;
 }
 #main #commentsList .comment::-webkit-scrollbar{
 	width : 15px;
@@ -95,4 +126,70 @@
 }
 #main #commentsList .comment::-webkit-scrollbar-track{
 	background-color : #66806A;
+}
+#main #commentsList .comment .one #modify_form{
+	width : 100%;
+	margin : 15px;
+	overflow: hidden;
+	position : absolute;
+}
+#main #commentsList .comment .one #modify_form textarea{
+	float : left;
+	width : 70%;
+	height : 80px;
+	background-color: #66806A;
+	border : none;
+	outline-color: #B4C6A6;
+	color: white;
+}
+#main #commentsList .comment .one #modify_form input[type='submit']{
+	width : 20%;
+	height : 80px;
+}
+}#main #commentsList .comment .one #reply_div{
+	height : 80px;
+	position: absolute;
+	top : 20px;
+	left : 100px;
+}
+#main #commentsList .comment .one #reply_form{
+	float : left;
+	width : 70%;
+	height : 80px;
+	background-color: #66806A;
+	border : none;
+	outline-color: #B4C6A6;
+	color: white;
+}
+#main #commentsList .comment .one #reply_form textarea{
+	height : 120px;
+}
+#main #commentsList .comment .one #reply_form input[type='submit']{
+	width : 20%;
+	height : 80px;
+}
+#main #commentsList form{
+	width : 33%;
+	height : 80px;
+	margin : 15px;
+	overflow: hidden;
+	position : absolute;
+}
+#main #commentsList form textarea{
+	float : left;
+	width : 80%;
+	height : 50px;
+	background-color: #66806A;
+	border : none;
+	outline-color: #B4C6A6;
+	color: white;
+}
+#main #commentsList form input[type='submit']{
+	float : left;
+	width : 16%;
+	height : 56.22px;
+	margin-left : 10px;
+	background-color: #66806A;
+	color: white;
+	border : none;
 }

@@ -9,10 +9,10 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<form action="${conPath }/commentsModify.do">
+	<form action="${conPath }/commentsModify.do" method="post" id="modify_form">
 		<input type="hidden" name="bnum" value="${comment.bnum }">
 		<input type="hidden" name="cid" value="${comment.cid }">
-		<textarea rows="2" cols="20" name="ccontent">${comment.ccontent}</textarea>
+		<textarea rows="2" cols="20" name="ccontent">${comment.ccontent }</textarea>
 		<input type="submit" value="SUBMIT">
 	</form>
 </body>

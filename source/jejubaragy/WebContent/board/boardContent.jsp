@@ -15,7 +15,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
-			$('.btn').click(function(){
+			$('.modify').click(function(){
 				var cid = $(this).attr('id');
 				$.ajax({
 					url : '${conPath }/commentsModifyView.do',
@@ -27,64 +27,109 @@
 					}
 				});
 			});
+			$('.reply').click(function(){
+				var cid = $(this).attr('id');
+				$('.reply'+cid).toggle();
+			});
 		});
 	</script>
+	<c:set var="SUCCESS" value="1"/>
+	<c:set var="FAIL" value="0"/>
+	<c:if test="${commentsWriteResult eq SUCCESS}">
+		<script>
+			location.href="${conPath}/boardContent.do";
+		</script>
+	</c:if>
+	<c:if test="${commentsWriteResult eq FAIL}">
+		<script>
+			alert('댓글 작성 실패');
+			location.href="${conPath}/boardContent.do";
+		</script>
+	</c:if>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<table id="content">
-			<tr class="big">
-				<td>
-					${boardContent.btitle }
-					<c:if test="${boardContent.aid != null && boardContent.aid == admin.aid }">
-						<input type="button" value="MODIFY" onclick="location.href='${conPath }/boardModifyView.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
-						<input type="button" value="DELETE" onclick="location.href='${conPath }/boardDelete.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
-					</c:if>
-					<c:if test="${boardContent.mid != null && boardContent.mid == member.mid }">
-						<input type="button" value="MODIFY" onclick="location.href='${conPath }/boardModifyView.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
-						<input type="button" value="DELETE" onclick="location.href='${conPath }/boardDelete.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
-					</c:if>
-				</td>
-			</tr>
-			<tr class="mid">
-				<td>${boardContent.bwriter }</td>
-			</tr>
-			<tr class="small">
-				<td>
-					HITS | ${boardContent.bhit }
-				</td>
-			</tr>
-			<tr class="small">
-				<td>DATE | ${boardContent.brdate }</td>
-			</tr>
-			<tr class="content">
-				<td>${boardContent.bcontent }</td>
-			</tr>
-		</table>
-		<div id="commentsList">
-			<form action="${conPath }/commentsWrite.do">
-				<input type="hidden" name="bnum" value="${boardContent.bnum }">
-				<textarea name="ccontent" rows="2" cols="20"></textarea>
-				<input type="submit" value="WRITE">
-			</form>
-			<div class="comment">
-				<c:forEach var="comments" items="${commentsList }">
-					<p id="ccontent${comments.cid }">
-						<c:if test="${comments.aid != null }">
-							<img alt="관리자사진" src="${conPath }/memberPhotoUp/noImage.png">
+		<div id="main_wrap">
+			<table id="content">
+				<tr class="big">
+					<td>
+						${boardContent.btitle }
+						<c:if test="${boardContent.aid != null && boardContent.aid == admin.aid }">
+							<input type="button" value="MODIFY" onclick="location.href='${conPath }/boardModifyView.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
+							<input type="button" value="DELETE" onclick="location.href='${conPath }/boardDelete.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
 						</c:if>
-						<c:if test="${comments.mid != null }">
-							<img alt="회원사진" src="${conPath }/memberPhotoUp/${comments.cphoto }">
+						<c:if test="${boardContent.mid != null && boardContent.mid == member.mid }">
+							<input type="button" value="MODIFY" onclick="location.href='${conPath }/boardModifyView.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
+							<input type="button" value="DELETE" onclick="location.href='${conPath }/boardDelete.do?bnum=${boardContent.bnum }&pageNum=${param.pageNum }'">
 						</c:if>
-						<div class="text">
-							<span class="cwriter">${comments.cwriter }</span>
-							<span class="ccontent">${comments.ccontent }</span>
+					</td>
+				</tr>
+				<tr class="mid">
+					<td>${boardContent.bwriter }</td>
+				</tr>
+				<tr class="small">
+					<td>
+						HITS | ${boardContent.bhit }
+					</td>
+				</tr>
+				<tr class="small brdate">
+					<td>DATE | ${boardContent.brdate }</td>
+				</tr>
+				<tr class="content">
+					<td>${boardContent.bcontent }</td>
+				</tr>
+			</table>
+			<div id="commentsList">
+				<div class="comment">
+					<c:forEach var="comments" items="${commentsList }">
+						<div id="ccontent${comments.cid }" class="one">
+							<c:if test="${comments.cindent > 0 }">
+								<c:forEach begin="0" end="${comments.cindent }" step="1">
+									<p>┕</p>
+								</c:forEach>
+							</c:if>
+							<c:if test="${comments.aid != null }">
+								<img alt="관리자사진" src="${conPath }/memberPhotoUp/noImage.png">
+							</c:if>
+							<c:if test="${comments.mid != null }">
+								<img alt="회원사진" src="${conPath }/memberPhotoUp/${comments.cphoto }">
+							</c:if>
+							<div class="text">
+								<span class="cwriter">${comments.cwriter }</span><br>
+								<span class="ccontent">${comments.ccontent }</span>
+							</div>
+							<c:if test="${not empty member || not empty admin }">
+								<button id="${comments.cid }" class="reply">REPLY</button>
+							</c:if>
+							<c:if test="${not empty admin }">
+								<button class="delete" onclick="${conPath }/commentsDelete.do?cid=${comments.cid }">DELETE</button>
+								<c:if test="${comments.aid != null && comments.aid == admin.aid }">
+									<button id="${comments.cid }" class="modify">MODIFY</button>
+								</c:if>
+							</c:if>
+							<c:if test="${comments.mid != null && comments.mid == member.mid }">
+								<button id="${comments.cid }" class="modify">MODIFY</button>
+								<button class="delete" onclick="${conPath }/commentsDelete.do?cid=${comments.cid }">DELETE</button>
+							</c:if>
+							<div class="reply${comments.cid }" id="reply_div" hidden="hidden">
+								<form action="${conPath }/commentsModify.do" method="post" id="reply_form">
+									<input type="hidden" name="bnum" value="${comment.bnum }">
+									<input type="hidden" name="cid" value="${comment.cid }">
+									<textarea rows="2" cols="20" name="ccontent">${comment.ccontent }</textarea>
+									<input type="submit" value="SUBMIT">
+								</form>
+							</div>
 						</div>
-						<button onclick="${conPath }/commentsDelete.do?cid=${comments.cid }">DELETE</button>
-						<button id="${comments.cid }" class="btn">MODIFY</button>
-					<p>
-				</c:forEach>
+					</c:forEach>
+				</div>
+				<c:if test="${not empty admin || not empty member }">
+					<form action="${conPath }/commentsWrite.do" method="post">
+						<input type="hidden" name="bnum" value="${boardContent.bnum }">
+						<textarea name="ccontent" rows="2" cols="20"></textarea>
+						<input type="submit" value="WRITE">
+					</form>
+				</c:if>
 			</div>
 		</div>
 		<jsp:include page="../main/footer.jsp"/>

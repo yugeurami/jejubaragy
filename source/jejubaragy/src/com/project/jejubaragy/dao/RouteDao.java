@@ -38,24 +38,20 @@ public class RouteDao {
 	}	
 	
 	// 내 루트 목록
-	public ArrayList<RouteDto> myRouteList(String mid, int startRow, int endRow) {
+	public ArrayList<RouteDto> myRouteList(String mid) {
 		ArrayList<RouteDto> routeList = new ArrayList<RouteDto>(); 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT *" + 
-				"    FROM (SELECT ROWNUM RN, A.*" + 
-				"                FROM (SELECT *n" + 
-				"                            FROM ROUTE " + 
-				"                            WHERE MID = ?" + 
-				"                            ORDER BY RSTARTDATE DESC)  A )" + 
-				"    WHERE RN BETWEEN ? AND ?";
+				"    FROM (SELECT *" + 
+				"                 FROM ROUTE" + 
+				"                 WHERE MID = ?" + 
+				"                  ORDER BY RSTARTDATE DESC)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int rnum = rs.getInt("rnum");
@@ -79,23 +75,18 @@ public class RouteDao {
 		return routeList;
 	}
 	// 전체 공개 루트 목록
-	public ArrayList<RouteDto> AllRouteList(int startRow, int endRow) {
+	public ArrayList<RouteDto> AllRouteList() {
 		ArrayList<RouteDto> routeList = new ArrayList<RouteDto>(); 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT *" + 
-				"    FROM (SELECT ROWNUM RN, A.*" + 
-				"                FROM (SELECT R.*, MNAME" + 
-				"                            FROM ROUTE R, MEMBER M  " + 
-				"                            WHERE R.MID=M.MID AND RPRIVATE = 1 " + 
-				"                            ORDER BY RNUM DESC)  A )" + 
-				"    WHERE RN BETWEEN ? AND ?";
+		String sql = "SELECT R.*, MNAME" + 
+				"        FROM ROUTE R, MEMBER M  " + 
+				"        WHERE R.MID=M.MID AND RPRIVATE = 1 " + 
+				"        ORDER BY RNUM DESC)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				int rnum = rs.getInt("rnum");

@@ -14,7 +14,7 @@
 	<link href="${conPath }/css/login.css" rel="stylesheet">
 	<c:if test="${not empty admin || not empty member }">
 		<script>
-			location.href="${conPath}/main.do";
+			location.href="${conPath}/boardBest.do";
 		</script>
 	</c:if>
 </head>

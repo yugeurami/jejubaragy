@@ -113,12 +113,11 @@ SELECT *
 
 -- 전체 공개 루트 목록(페이징)
 SELECT *
-    FROM (SELECT ROWNUM RN, A.*
+    FROM (SELECT  A.*
                 FROM (SELECT R.*, MNAME 
                             FROM ROUTE R, MEMBER M  
                             WHERE R.MID=M.MID AND RPRIVATE = 1 
-                            ORDER BY RNUM DESC)  A )
-    WHERE RN BETWEEN 1 AND 10;
+                            ORDER BY RNUM DESC)  A );
 
 -- 루트 생성
 INSERT INTO ROUTE(RNUM, RNAME, MID, RSTARTDATE, RENDDATE, RPRIVATE)

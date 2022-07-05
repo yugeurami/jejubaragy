@@ -10,7 +10,7 @@
 	<title>Insert title here</title>
 	<c:if test="${not empty admin || empty member }">
 		<script>
-			location.href="${conPath}/main.do";
+			location.href="${conPath}/boardBest.do";
 		</script>
 	</c:if>
 	<link rel="preconnect" href="https://fonts.googleapis.com">

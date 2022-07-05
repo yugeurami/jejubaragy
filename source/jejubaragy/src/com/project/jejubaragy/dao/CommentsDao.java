@@ -132,7 +132,7 @@ public class CommentsDao {
 				Date crdate = rs.getDate("crdate");
 				String cip = rs.getString("cip");
 				dto = new CommentsDto(cid, mid, aid, cwriter, cphoto, bnum, ccontent, 
-						cgroup, cstep, cindent, crdate, cip));
+						cgroup, cstep, cindent, crdate, cip);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

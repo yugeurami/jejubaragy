@@ -1,0 +1,71 @@
+@charset "UTF-8";
+*{
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+#main{
+	width : 60%;
+	position : absolute;
+	top : 100px;
+	right : 200px;
+}
+#main #best_wrap{
+	width : 100%;
+	overflow: hidden;
+	border-radius : 20px;
+	background-color: #B4C6A6;
+	box-shadow: 8px 5px 5px grey;
+}
+#main #best_wrap .best{
+	width : 90%;
+	height : 300px;
+	margin : 50px auto;
+	padding-bottom: 50px;
+	position: relative;
+}
+#main #best_wrap .best .photo{
+	width : 100%;
+	height : 300px;
+	border-radius : 20px;
+	position: relative;
+	overflow: hidden;
+}
+#main #best_wrap .best .photo img{
+	position: absolute;
+  	width: 100%;
+  	top: 65%;
+  	left: 65%;
+  	transform: translate(-65%, -65%);
+}
+#main #best_wrap .best .photo:hover{
+	width : 98.6%;
+	height : 284px;
+	border : 8px solid #66806A;
+}
+#main #best_wrap .best .text{
+	position : absolute;
+	width : 100%;
+	height : 70px;
+	left : 0px;
+	bottom : 65px;
+}
+#main #best_wrap .best .text .btitle{
+	font-size: 30px;
+	font-weight: 700;
+	padding-left : 50px;
+}
+#main #best_wrap .best .text .bwriter{
+	font-size: 20px;
+	font-weight: 500;
+	padding-left : 50px;
+}
+#main #best_wrap .best .text_box{
+	position : absolute;
+	width : 100%;
+	height : 100px;
+	left : 0px;
+	bottom : 50px;
+	border-radius : 0 0 20px 20px;
+	background-color: white;
+	opacity: 0.6;
+}
+
