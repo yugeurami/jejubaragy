@@ -38,7 +38,7 @@
 			<span class="title">MY TRAVEL ROUTE</span>
 			<div id="route_scroll">
 				<c:forEach var="route" items="${myRouteList }">
-					<div class="one_route" onclick="location.href='${conPath }/routeContent.do?rnum=${route.rnum }'">
+					<div class="one_route" onclick="location.href='${conPath }/routeContent.do?rnum=${route.rnum }&mid=${route.mid }'">
 						<span class="rname">${route.rname }</span><br>
 						<span class="date">${route.rstartdate } ~ ${route.renddate }</span><br>
 					</div>

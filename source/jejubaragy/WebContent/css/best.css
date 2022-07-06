@@ -3,28 +3,42 @@
 	font-family: 'Noto Sans KR', sans-serif;	
 }
 #main{
-	width : 60%;
+	width : 70%;
 	position : absolute;
 	top : 100px;
-	right : 200px;
+	right : 100px;
 }
 #main #best_wrap{
 	width : 100%;
-	overflow: hidden;
+	height : 900px;
+	overflow : scroll;
+	overflow-x : hidden;
 	border-radius : 20px;
 	background-color: #B4C6A6;
 	box-shadow: 8px 5px 5px grey;
 }
+#main #best_wrap::-webkit-scrollbar{
+	width : 15px;
+}
+#main #best_wrap::-webkit-scrollbar-thumb{
+	border-radius : 0 20px 20px 0;
+	background-color : #FFF1AF;
+}
+#main #best_wrap::-webkit-scrollbar-track{
+	background-color : #66806A;
+	border-radius : 0 20px 20px 0;
+}
 #main #best_wrap .best{
 	width : 90%;
-	height : 300px;
-	margin : 50px auto;
+	height : 450px;
+	margin : 30px auto;
 	padding-bottom: 50px;
 	position: relative;
+	cursor: pointer;
 }
 #main #best_wrap .best .photo{
 	width : 100%;
-	height : 300px;
+	height : 450px;
 	border-radius : 20px;
 	position: relative;
 	overflow: hidden;
@@ -36,10 +50,11 @@
   	left: 65%;
   	transform: translate(-65%, -65%);
 }
-#main #best_wrap .best .photo:hover{
-	width : 98.6%;
-	height : 284px;
+#main #best_wrap .best:hover .photo{
+	width : 98.8%;
+	height : 434px;
 	border : 8px solid #66806A;
+	
 }
 #main #best_wrap .best .text{
 	position : absolute;

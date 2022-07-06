@@ -5,13 +5,15 @@ public class DetailRouteDto {
 	private int rnum;
 	private int sid;
 	private String sname;
+	private String saddress;
 	private int ddate;
 	private int dseq;
-	public DetailRouteDto(int dnum, int rnum, int sid, String sname, int ddate, int dseq) {
+	public DetailRouteDto(int dnum, int rnum, int sid, String sname, String saddress, int ddate, int dseq) {
 		this.dnum = dnum;
 		this.rnum = rnum;
 		this.sid = sid;
 		this.sname = sname;
+		this.saddress = saddress;
 		this.ddate = ddate;
 		this.dseq = dseq;
 	}
@@ -38,6 +40,12 @@ public class DetailRouteDto {
 	}
 	public void setSname(String sname) {
 		this.sname = sname;
+	}
+	public String getSaddress() {
+		return saddress;
+	}
+	public void setSaddress(String saddress) {
+		this.saddress = saddress;
 	}
 	public int getDdate() {
 		return ddate;

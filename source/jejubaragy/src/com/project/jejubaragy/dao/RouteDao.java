@@ -83,7 +83,7 @@ public class RouteDao {
 		String sql = "SELECT R.*, MNAME" + 
 				"        FROM ROUTE R, MEMBER M  " + 
 				"        WHERE R.MID=M.MID AND RPRIVATE = 1 " + 
-				"        ORDER BY RNUM DESC)";
+				"        ORDER BY RNUM DESC";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -91,11 +91,12 @@ public class RouteDao {
 			while(rs.next()) {
 				int rnum = rs.getInt("rnum");
 				String rname = rs.getString("rname");
+				String mid = rs.getString("mid");
 				String mname = rs.getString("mname");
 				Date rstartdate = rs.getDate("rstartdate");
 				Date renddate = rs.getDate("renddate");
 				int rprivate = rs.getInt("rprivate");
-				routeList.add(new RouteDto(rnum, rname, null, mname, rstartdate, renddate, rprivate));
+				routeList.add(new RouteDto(rnum, rname, mid, mname, rstartdate, renddate, rprivate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

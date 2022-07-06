@@ -23,8 +23,11 @@ INSERT INTO CATEGORY (CCODE, CNAME)
 
 -- SPOT                   
 INSERT INTO SPOT(SID, CCODE, SNAME, SPHOTO, SADDRESS, DESCRIPTION )
-                    VALUES(7912085, 'AT4', '비자림', '비자림.jpg', '제주특별자치도 제주시 구좌읍 평대리 3161-1',  '걷기 좋은 비자숲길');                    
-                    
+                    VALUES(7912085, 'AT4', '비자림', '비자림.jpg', '제주특별자치도 제주시 구좌읍 평대리 3161-1',  '걷기 좋은 비자숲길'); 
+INSERT INTO SPOT(SID, CCODE, SNAME, SPHOTO, SADDRESS, DESCRIPTION )
+                    VALUES(1508345156, 'CT1', '아르떼뮤지엄 제주', '아르떼뮤지엄.png', '제주특별자치도 제주시 애월읍 어림비로 478',  '빛이 가득한 감성 넘치는 전시를 볼 수 있는 미술관');   
+INSERT INTO SPOT(SID, CCODE, SNAME, SPHOTO, SADDRESS, DESCRIPTION )
+                    VALUES(1682547680, 'CT1', '빛의 벙커', '빛의벙커.jpg', '제주특별자치도 서귀포시 성산읍 고성리 2039-22',  '빛이 가득한 아름다운 벙커');   
 
 -- BOARD
 INSERT INTO BOARD(BNUM, MID, AID, BWRITER, RNUM, BTITLE, BCONTENT, BMAINPHOTO, BHIT, BIP, BRDATE)

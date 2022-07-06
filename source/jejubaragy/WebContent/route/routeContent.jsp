@@ -7,51 +7,20 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>제주바라기:여행지</title>
+	<title>Insert title here</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-	<link href="${conPath }/css/map.css" rel="stylesheet">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="${conPath }/css/routeContent.css" rel="stylesheet">
 	<script>
 		$(document).ready(function(){
-			var code = '${param.ccode}';
-			if(code == 'AT4'){
-				$('#AT4').addClass('selected');
-			}else if(code == 'CT1'){
-				$('#CT1').addClass('selected');
-			}else if(code == 'AD5'){
-				$('#AD5').addClass('selected');
-			}else if(code == 'FD6'){
-				$('#FD6').addClass('selected');
-			}else if(code == 'CE7'){
-				$('#CE7').addClass('selected');
-			}else{
-				$('#ALL').addClass('selected');
-			}
-			$('.detail').click( function (){
-				$('.detail').removeClass("selected");
-				var sid = $(this).attr('id');
-				$('#'+sid).addClass("selected");
-		    	$('#list').animate({scrollTop : $('#'+sid).offset().top}, 500);
-			});
 		});
 	</script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<div id="code">
-			<ul>
-				<li><a href="${conPath }/spotList.do" id="ALL">ALL</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=AT4" id="AT4">ATTRACTION</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=CT1" id="CT1">CULTURAL FACILITIES</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=AD5" id="AD5">ACCOMMODATION</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=FD6" id="FD6">RESTAURANT</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=CE7" id="CE7">CAFE</a></li>
-			</ul>
-		</div>
 		<div class="main_wrap">
 			<div class="wrap">
 				<div class="map_wrap">
@@ -65,22 +34,32 @@
 				</div>
 			</div>
 			<div id="spotlist">
-				<div id="search">
-					<form action="spotList.do" method="post">
-						<input type="hidden" name="ccode" value="${ccode }">
-						<input type="text" name="search" value="${search }">
-						<input type="submit" value=" ">
-					</form>
-				</div>
 				<div id="list">
-					<c:forEach var="spot" items="${spotList }">
-						<div id="${spot.sid }" class="detail">
-							<img alt="장소사진" class="img" src="${conPath }/spotPhotoUp/${spot.sphoto }">
-							<span class="bold">${spot.sname }</span>
-							<span class="light">${spot.description }</span>
+					<c:forEach var="day" begin="1" end="${days }">
+						<div id="${day }" class="day">
+							<span class="day_text">DAY ${day }</span>
+							<c:forEach var="spot" items="${detailRoute }">
+								<c:if test="${day == spot.ddate }">
+									<div id="${spot.sid }" class="detail">
+										<span class="bold">${spot.sname }</span>
+									</div>
+								</c:if>
+							</c:forEach>
 						</div>
 					</c:forEach>
 				</div>
+				<c:if test="${not empty member && member.mid == param.mid }">
+					<div id="myRoute">
+						<form>
+							<input type="hidden" value="${rnum }">
+							<input type="submit" value="DELETE">
+						</form>
+						<form>
+							<input type="hidden" value="${rnum }">
+							<input type="submit" value="MODIFY">
+						</form>
+					</div>
+				</c:if>
 			</div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
 		<script>
@@ -126,7 +105,7 @@
 				}
 			});
 		</script>
-		<c:forEach var="spot" items="${spotList }">
+		<c:forEach var="spot" items="${detailRoute }">
 			<script>
 			// 주소-좌표 변환 객체를 생성합니다
 			var geocoder = new kakao.maps.services.Geocoder();

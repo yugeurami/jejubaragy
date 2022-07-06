@@ -28,6 +28,7 @@
 				});
 			});
 			$('.reply').click(function(){
+				$('#reply_div').hide();
 				var cid = $(this).attr('id');
 				$('.reply'+cid).toggle();
 			});
@@ -76,6 +77,9 @@
 				<tr class="small brdate">
 					<td>DATE | ${boardContent.brdate }</td>
 				</tr>
+				<tr class="mid">
+					<td>${boardContent.bwriter }</td>
+				</tr>
 				<tr class="content">
 					<td>${boardContent.bcontent }</td>
 				</tr>
@@ -113,18 +117,18 @@
 								<button class="delete" onclick="${conPath }/commentsDelete.do?cid=${comments.cid }">DELETE</button>
 							</c:if>
 							<div class="reply${comments.cid }" id="reply_div" hidden="hidden">
-								<form action="${conPath }/commentsModify.do" method="post" id="reply_form">
+								<form action="${conPath }/commentsReply.do" method="post" id="reply_form">
 									<input type="hidden" name="bnum" value="${comment.bnum }">
 									<input type="hidden" name="cid" value="${comment.cid }">
 									<textarea rows="2" cols="20" name="ccontent">${comment.ccontent }</textarea>
-									<input type="submit" value="SUBMIT">
+									<input type="submit" value="REPLY">
 								</form>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
 				<c:if test="${not empty admin || not empty member }">
-					<form action="${conPath }/commentsWrite.do" method="post">
+					<form action="${conPath }/commentsWrite.do" method="post" class="write">
 						<input type="hidden" name="bnum" value="${boardContent.bnum }">
 						<textarea name="ccontent" rows="2" cols="20"></textarea>
 						<input type="submit" value="WRITE">

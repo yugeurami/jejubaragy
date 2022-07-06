@@ -19,11 +19,7 @@
 	
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-	<c:if test="${empty admin && empty member }">
-		<script>
-			location.href="${conPath }/main.do";
-		</script>
-	</c:if>
+	<link href="${conPath }/css/boardWrite.css" rel="stylesheet">
 	<script>
 		$(document).ready(function() {
 			$('#summernote').summernote({
@@ -38,44 +34,51 @@
 			});
 		});
 	</script>
+	<c:if test="${empty admin && empty member }">
+		<script>
+			location.href="${conPath }/boardBest.do";
+		</script>
+	</c:if>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<div id="join">
-			<form action="${conPath }/boardWrite.do" method="post" enctype="multipart/form-data">
-				<table>
-					<tr>
-						<th>TITLE</th>
-						<td><input type="text" name="btitle" required="required"></td>
-					</tr>					
-					<tr>
-						<th>ROUTE</th>
-						<td>
-							<select name="rnum" size="5">
-								<option></option>
-								<c:forEach var="rList" items="${routeList }">
-									<option value="${rList.rnum }">${rList.rname }</option>
-								</c:forEach>
-							</select>
-						</td>
-					</tr>					
-					<tr>
-						<th>MAIN PHOTO</th>
-						<td><input type="file" name="bmainphoto"></td>
-					</tr>					
-					<tr>
-						<td colspan="2"><textarea id="summernote" name="bcontent" ></textarea></td>
-					</tr>
-					<tr>
-						<td>
-							<input type="submit" value="WRITE">
-						</td>
-					</tr>				
-				</table>
-			</form>
+		<div class="main_wrap">
+			<div id="join">
+				<form action="${conPath }/boardWrite.do" method="post" enctype="multipart/form-data">
+					<table>
+						<tr>
+							<th>TITLE</th>
+							<td><input type="text" name="btitle" required="required"></td>
+						</tr>					
+						<tr>
+							<th>ROUTE</th>
+							<td>
+								<select name="rnum">
+									<option></option>
+									<c:forEach var="rList" items="${myRouteList }">
+										<option value="${rList.rnum }">${rList.rname }</option>
+									</c:forEach>
+								</select>
+							</td>
+						</tr>					
+						<tr>
+							<th>MAIN PHOTO</th>
+							<td><input type="file" name="bmainphoto"></td>
+						</tr>					
+						<tr>
+							<td colspan="2"><textarea id="summernote" name="bcontent" ></textarea></td>
+						</tr>
+						<tr class="button">
+							<td colspan="2">
+								<input type="submit" value="WRITE">
+							</td>
+						</tr>				
+					</table>
+				</form>
+			</div>
 		</div>
+		<jsp:include page="../main/footer.jsp"/>
 	</div>
-	<jsp:include page="../main/footer.jsp"/>
 </body>
 </html>

@@ -40,7 +40,7 @@ public class DetailRouteDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT D.*, SNAME FROM DETAILROUTE D, SPOT S" + 
+		String sql = "SELECT D.*, SNAME, SADDRESS FROM DETAILROUTE D, SPOT S" + 
 				"    WHERE D.SID=S.SID AND RNUM = ?" + 
 				"    ORDER BY DDATE, DSEQ";
 		try {
@@ -54,7 +54,8 @@ public class DetailRouteDao {
 				int ddate = rs.getInt("ddate");
 				int dseq = rs.getInt("dseq");
 				String sname = rs.getString("sname");
-				details.add(new DetailRouteDto(dnum, rnum, sid, sname, ddate, dseq));
+				String saddress = rs.getString("saddress");
+				details.add(new DetailRouteDto(dnum, rnum, sid, sname, saddress, ddate, dseq));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -68,6 +69,33 @@ public class DetailRouteDao {
 			}
 		}
 		return details;
+	}
+	// 루트의 일수
+	public int routeDays(int rnum) {
+		int days = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT MAX(DDATE) DAYS FROM DETAILROUTE WHERE RNUM = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rnum);
+			rs = pstmt.executeQuery();
+			rs.next();
+			days = rs.getInt("days");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		return days;
 	}
 	
 	// 디테일 루트 만들기

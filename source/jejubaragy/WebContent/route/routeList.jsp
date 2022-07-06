@@ -15,7 +15,7 @@
 	<link href="${conPath }/css/routelist.css" rel="stylesheet">
 	<script>
 		$(document).ready(function(){
-
+			
 		});
 	</script>
 </head>
@@ -23,12 +23,20 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
 		<div id="main_wrap">
-			<span class="title">MY TRAVEL ROUTE</span>
+			<span class="title">TRAVEL ROUTE</span>
 			<div id="route_scroll">
-				<c:forEach var="route" items="${myRouteList }">
-					<div class="one_route" onclick="location.href='${conPath }/routeContent.do?rnum=${route.rnum }'">
+				<c:forEach var="route" items="${routeList }">
+					<div class="one_route" onclick="location.href='${conPath }/routeContent.do?rnum=${route.rnum }&mid=${route.mid }'">
 						<span class="rname">${route.rname }</span><br>
-						<span class="date">${route.rstartdate } ~ ${route.renddate }</span><br>
+						<span class="mname">${route.mname }</span><br>
+						<span id="${route.rnum }date" class="date"></span>
+						<script>
+							var startdate = '${route.rstartdate}';
+							var enddate = '${route.renddate}';
+							var nights =  parseInt((new Date(enddate) - new Date(startdate)) / (24 * 60 * 60 * 1000));
+							var days =  nights + 1;
+							document.getElementById('${route.rnum }date').append(nights, "박 ", days,  "일");
+						</script>
 					</div>
 				</c:forEach>
 			</div>

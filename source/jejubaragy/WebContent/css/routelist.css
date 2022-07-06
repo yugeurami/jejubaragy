@@ -3,10 +3,10 @@
 	font-family: 'Noto Sans KR', sans-serif;	
 }
 #main{
-	width : 50%;
+	width : 70%;
 	position : absolute;
 	top : 80px;
-	right : 350px;
+	right : 100px;
 }
 #main #main_wrap{
 	overflow: hidden;
@@ -44,16 +44,21 @@
 }
 #main #main_wrap #route_scroll .one_route{
 	width : 90%;
-	height : 90px;
+	height : 100px;
 	margin : 10px auto;
 	background-color: #B4C6A6;
 	border-radius : 20px;
-	padding-top: 20px;
+	padding-top: 15px;
 }
 #main #main_wrap #route_scroll .one_route .rname{
 	color : #FFF1AF;
 	font-size: 25px;
 	font-weight: 700;
+}
+#main #main_wrap #route_scroll .one_route .mname{
+	color : white;
+	font-size: 20px;
+	font-weight: 500;
 }
 #main #main_wrap #route_scroll .one_route .date{
 	color : white;

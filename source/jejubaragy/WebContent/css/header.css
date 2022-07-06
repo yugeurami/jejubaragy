@@ -42,6 +42,7 @@ header ul li a{
 }
 header ul li a:hover{
 	color : #66806A;
+	cursor: pointer;
 }
 
 /* 회원가입 등의 메뉴 */
@@ -84,4 +85,5 @@ header #bottom_nav ul li a{
 }
 #bottom_nav ul li a:hover{
 	color : #66806A;
+	cursor: pointer;
 }

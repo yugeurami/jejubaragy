@@ -42,25 +42,25 @@
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
 		<div id="best_wrap">
-			<c:forEach var="best" items="${best }">
-				<div class="best">
-					<div class="photo">
-						<c:if test="${best.bmainphoto != null }">
-							<img alt="베스트글사진" src="${conPath }/boardPhotoUp/${best.bmainphoto }"
-								onclick="location.href='${conPath }/boardContent.do?bnum=${best.bnum }'">
-						</c:if>
-						<c:if test="${best.bmainphoto == null }">
-							<img alt="베스트임시글사진" src="${conPath }/boardPhotoUp/noImg.jpg"
-								onclick="location.href='${conPath }/boardContent.do?bnum=${best.bnum }'">
-						</c:if>
+			<div id="scroll">
+				<c:forEach var="best" items="${best }">
+					<div class="best" onclick="location.href='${conPath }/boardContent.do?bnum=${best.bnum }'">
+						<div class="photo">
+							<c:if test="${best.bmainphoto != null }">
+								<img alt="베스트글사진" src="${conPath }/boardPhotoUp/${best.bmainphoto }">
+							</c:if>
+							<c:if test="${best.bmainphoto == null }">
+								<img alt="베스트임시글사진" src="${conPath }/boardPhotoUp/noImg.jpg">
+							</c:if>
+						</div>
+						<div class="text_box"></div>
+						<div class="text">
+							<span class="btitle">${best.btitle }</span><br>
+							<span class="bwriter">${best.bwriter }</span>
+						</div>
 					</div>
-					<div class="text_box"></div>
-					<div class="text">
-						<span class="btitle">${best.btitle }</span><br>
-						<span class="bwriter">${best.bwriter }</span>
-					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
 		<jsp:include page="../main/footer.jsp"/>
 	</div>

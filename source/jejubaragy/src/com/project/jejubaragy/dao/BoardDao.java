@@ -328,7 +328,7 @@ public class BoardDao {
 	}
 	
 	// 글 삭제
-	public int boardDelete(String bnum) {
+	public int boardDelete(int bnum) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -336,7 +336,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bnum);
+			pstmt.setInt(1, bnum);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

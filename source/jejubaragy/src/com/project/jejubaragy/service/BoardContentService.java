@@ -22,7 +22,6 @@ public class BoardContentService implements Service {
 			bnum = (Integer)session.getAttribute("bnum");
 			session.removeAttribute("bnum");
 		}
-		System.out.println("contentService : "+ bnum);
 		String pageNum = request.getParameter("pageNum");
 		bdao.hitup(bnum);
 		request.setAttribute("boardContent", bdao.boardContent(bnum));

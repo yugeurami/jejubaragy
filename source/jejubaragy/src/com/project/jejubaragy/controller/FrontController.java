@@ -15,6 +15,7 @@ import com.project.jejubaragy.service.AdminListService;
 import com.project.jejubaragy.service.AdminLoginService;
 import com.project.jejubaragy.service.BoardBestListService;
 import com.project.jejubaragy.service.BoardContentService;
+import com.project.jejubaragy.service.BoardDeleteService;
 import com.project.jejubaragy.service.LogoutService;
 import com.project.jejubaragy.service.MemberDownListService;
 import com.project.jejubaragy.service.MemberDownService;
@@ -25,6 +26,7 @@ import com.project.jejubaragy.service.MemberLoginService;
 import com.project.jejubaragy.service.MemberModifyService;
 import com.project.jejubaragy.service.MemberUpService;
 import com.project.jejubaragy.service.MyRouteListService;
+import com.project.jejubaragy.service.RouteContentService;
 import com.project.jejubaragy.service.RouteListService;
 import com.project.jejubaragy.service.Service;
 import com.project.jejubaragy.service.SpotListService;
@@ -154,6 +156,8 @@ public class FrontController extends HttpServlet {
 			viewPage = "board/boardList.jsp";
 		}else if(command.equals("/boardWriteView.do")) {
 			readPage = true;
+			service = new MyRouteListService();
+			service.execute(request, response);
 			viewPage = "board/boardWrite.jsp";
 		}else if(command.equals("/boardWrite.do")) {
 			if(readPage) {
@@ -175,6 +179,10 @@ public class FrontController extends HttpServlet {
 				service = new BoardModifyService();
 				service.execute(request, response);
 			}
+			viewPage = "boardContent.do";
+		}else if(command.equals("/boardDelete.do")) {
+			service = new BoardDeleteService();
+			service.execute(request, response);
 			viewPage = "boardContent.do";
 		}else if(command.equals("/commentsModifyView.do")) {
 			service = new CommentsGetService();
@@ -204,6 +212,10 @@ public class FrontController extends HttpServlet {
 			service = new RouteListService();
 			service.execute(request, response);
 			viewPage = "route/routeList.jsp";
+		}else if(command.equals("/routeContent.do")) {
+			service = new RouteContentService();
+			service.execute(request, response);
+			viewPage = "route/routeContent.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
