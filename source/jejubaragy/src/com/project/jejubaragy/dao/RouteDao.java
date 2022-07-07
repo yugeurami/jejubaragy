@@ -112,7 +112,6 @@ public class RouteDao {
 		return routeList;
 	}
 	
-	
 	// 루트 만들기
 	public int routeMake(String rname, String mid, Date rstartdate, Date renddate, int rprivate) {
 		int result = FAIL;
@@ -140,6 +139,32 @@ public class RouteDao {
 			}
 		}
 		return result;
+	}
+	public int getROUTE_SEQ() {
+		int rnum= 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT ROUTE_SEQ.CURRVAL FROM DUAL";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				rnum = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		return rnum;
 	}
 	// 디테일 수정하기
 	public int routeModify(String rname, Date rstartdate, Date renddate, int rprivate, int rnum ) {

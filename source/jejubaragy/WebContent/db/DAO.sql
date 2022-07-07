@@ -118,11 +118,13 @@ SELECT *
                             FROM ROUTE R, MEMBER M  
                             WHERE R.MID=M.MID AND RPRIVATE = 1 
                             ORDER BY RNUM DESC)  A );
-
+-- 루트번호로 루트 가져오기
+SELECT * FROM ROUTE WHERE RNUM = 1;
 -- 루트 생성
 INSERT INTO ROUTE(RNUM, RNAME, MID, RSTARTDATE, RENDDATE, RPRIVATE)
                 VALUES(ROUTE_SEQ.NEXTVAL, '제주도 첫 여행', 'aaa', '2022-10-10', '2022-10-15' , 1);
-                
+       
+       select ROUTE_SEQ.currval from dual;         
 -- 루트 수정
 UPDATE ROUTE 
     SET RNAME = '제주도 갑니다',
@@ -141,6 +143,7 @@ SELECT D.*, SNAME, SADDRESS FROM DETAILROUTE D, SPOT S
     
 -- 날짜 가져오기
 SELECT MAX(DDATE) DAYS FROM DETAILROUTE WHERE RNUM = 1;
+
 -- 디테일 루트 만들기(루트에 장소 추가하기)
 INSERT INTO DETAILROUTE(DNUM, RNUM, SID, DDATE, DSEQ)
                 VALUES(DETAILROUTE_SEQ.NEXTVAL, 1, 7912085, 1, 1);

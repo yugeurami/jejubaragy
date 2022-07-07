@@ -7,57 +7,23 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>제주바라기:여행지</title>
+	<title>Insert title here</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-	<link href="${conPath }/css/map.css" rel="stylesheet">
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-		$(document).ready(function(){
-			var code = '${param.ccode}';
-			if(code == 'AT4'){
-				$('#AT4').addClass('selected');
-			}else if(code == 'CT1'){
-				$('#CT1').addClass('selected');
-			}else if(code == 'AD5'){
-				$('#AD5').addClass('selected');
-			}else if(code == 'FD6'){
-				$('#FD6').addClass('selected');
-			}else if(code == 'CE7'){
-				$('#CE7').addClass('selected');
-			}else{
-				$('#ALL').addClass('selected');
-			}
-			$('.detail').click( function (){
-				$('.detail').removeClass("selected");
-				var sid = $(this).attr('id');
-				$('#'+sid).addClass("selected");
-		    	$('#list').animate({scrollTop : $('#'+sid).offset().top}, 500);
-			});
-			
-		});
-	</script>
+	<link href="${conPath }/css/routeContent.css" rel="stylesheet">
+ 	<link rel="stylesheet" href="/resources/demos/style.css">
 </head>
 <body>
 	<jsp:include page="../main/header.jsp"/>
 	<div id="main">
-		<div id="code">
-			<ul>
-				<li><a href="${conPath }/spotList.do" id="ALL">ALL</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=AT4" id="AT4">ATTRACTION</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=CT1" id="CT1">CULTURAL FACILITIES</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=AD5" id="AD5">ACCOMMODATION</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=FD6" id="FD6">RESTAURANT</a></li>
-				<li><a href="${conPath }/spotList.do?ccode=CE7" id="CE7">CAFE</a></li>
-			</ul>
-		</div>
 		<div class="main_wrap">
+			<div id="route_info">
+				<span class="title">${rname }</span>
+			</div>
 			<div class="wrap">
 				<div class="map_wrap">
 				    <div id="map"></div> 
-				    
 				    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
 				    <div class="custom_zoomcontrol radius_border"> 
 				        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
@@ -66,22 +32,33 @@
 				</div>
 			</div>
 			<div id="spotlist">
-				<div id="search">
-					<form action="spotList.do" method="post">
-						<input type="hidden" name="ccode" value="${ccode }">
-						<input type="text" name="search" value="${search }">
-						<input type="submit" value=" ">
+				<div id="list">
+					<form action="${conPath }/detailRouteSubmit.do" method="post">
+						<c:forEach var="day" begin="1" end="${days }">
+							<div id="${day }" class="day column">
+								<span class="day_text">DAY ${day }</span>
+								<c:forEach var="spot" items="${detailRoute }">
+									<c:if test="${day == spot.ddate }">
+										<div id="${spot.sid }" class="detail bold spot_header">${spot.sname }</div>
+									</c:if>
+								</c:forEach>
+							</div>
+						</c:forEach>
+						<input type="submit" value="SUBMIT">
 					</form>
 				</div>
-				<div id="list">
-					<c:forEach var="spot" items="${spotList }">
-						<div id="${spot.sid }" class="detail">
-							<img alt="장소사진" class="img" src="${conPath }/spotPhotoUp/${spot.sphoto }">
-							<span class="bold">${spot.sname }</span>
-							<span class="light">${spot.description }</span>
-						</div>
-					</c:forEach>
-				</div>
+				<c:if test="${not empty member && member.mid == param.mid }">
+					<div id="myRoute">
+						<form>
+							<input type="hidden" value="${param.rnum }">
+							<input type="submit" value="DELETE">
+						</form>
+						<form>
+							<input type="hidden" value="${param.rnum }">
+							<input type="submit" value="MODIFY">
+						</form>
+					</div>
+				</c:if>
 			</div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=745b8108fc2b2f1d3e2f0adfdee1fdc1&libraries=services"></script>
 		<script>
@@ -151,25 +128,58 @@
 					        position: coords,
 					        image: markerImage
 				        });
-   							
-   						marker.setTitle('${spot.sid }', coords);
-   						
-				
-   					    kakao.maps.event.addListener(marker, 'click', function() {
-   					    	$('.detail').removeClass("selected");
-   					    	var sid = this.getTitle();
-   							$('#'+sid).addClass("selected");
-   					    	$('#list').animate({scrollTop : $('#'+sid).offset().top}, 500);
-   					    });
-				     }
-				}); 
+   						var content = '<div class="info_wrap">' + 
+   			            '    <div class="info">' + 
+   			            '    	${spot.sname }' + 
+   			            '			<c:if test="${detail.sid != spot.sid}">'+	
+   			            '				<form action="${conPath }/detailRouteMake.do" method="post">'+
+   			            '               	<input type="hidden" name="sid" value="${spot.sid }">'+
+   			            '               	<input type="hidden" name="rnum" value="${rnum }">'+
+   			            '               	<input type="hidden" name="rname" value="${rname }">'+
+   			            '               	<input type="hidden" name="days" value="${days }">'+
+   			            '                	<input type="submit" value="+">' + 
+   			            '			</c:if>' +
+   			            '    </div>' +    
+   			            '</div>';
+
+			   			// 마커 위에 커스텀오버레이를 표시합니다
+			   			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+			   			var overlay = new kakao.maps.CustomOverlay({
+			   			    content: content,
+			   			    map: map,
+			   			    position: marker.getPosition()
+			   			});
+			   			overlay.setVisible(false);
+		   				overlay.setMap(null);   
+			   			
+			   			// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+			   			kakao.maps.event.addListener(marker, 'click', function() {
+							if(overlay.getVisible()){
+				   				overlay.setMap(null);   
+				   				overlay.setVisible(false);
+							}else if(overlay.getVisible() == false){
+				   			    overlay.setMap(map);     
+				   				overlay.setVisible(true);
+							}
+			   			});
+				    } 
+				});    
 			</script>
 		</c:forEach>
-		<script>
-			
-		</script>
 		</div>
 		<jsp:include page="../main/footer.jsp"/>
 	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	<script>
+		$(document).ready(function(){
+			$( ".column" ).sortable({        
+				connectWith: ".column",
+			    handle: ".spot_header",
+			    cancel: ".no_move",
+			    placeholder: "spot_placeholder"
+			});
+		});
+	</script>
 </body>
 </html>

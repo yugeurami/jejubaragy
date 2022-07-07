@@ -61,6 +61,11 @@ public class RouteDto {
 	public void setRprivate(int rprivate) {
 		this.rprivate = rprivate;
 	}
+	@Override
+	public String toString() {
+		return "RouteDto [rnum=" + rnum + ", rname=" + rname + ", mid=" + mid + ", mname=" + mname + ", rstartdate="
+				+ rstartdate + ", renddate=" + renddate + ", rprivate=" + rprivate + "]";
+	}
 	
 	
 }

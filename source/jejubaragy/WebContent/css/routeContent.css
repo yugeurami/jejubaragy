@@ -117,20 +117,23 @@
 	font-size : 25px;
 	font-weight : 900;
 	text-align: center;	
+	position : absolute;
 }
 .main_wrap #spotlist #list .day .detail{
 	width : 90%;
 	margin : 15px auto;
+	position : relative;
 	color : white;
 	background-color : #B4C6A6;
 	border-radius : 10px;
+	cursor: pointer;
 }
 .main_wrap #spotlist #list .day .selected{
 	color : black;
 	background-color : #FFF1AF;
 }
 
-#spotlist #list .day .detail .bold{
+#spotlist #list .day .bold{
 	line-height : 30px;
 	display : block;
 	font-size : 20px;
@@ -139,4 +142,22 @@
 	white-space : nowrap;
 	overflow : hidden;
 	text-overflow : ellipsis;
+}
+.info_wrap{
+	font-size: 18px;
+	margin : 0 0 -10px 0;
+}
+.info_wrap .info{
+	width : 200px;
+	background-color: #B4C6A6;
+	padding : 5px;
+}
+.info_wrap .info .add{
+	display : inline-block;
+	width : 50px;
+	text-align: center;
+	color : #B4C6A6;
+	background-color: #66806A;
+	border-radius : 8px;
+	cursor: pointer;
 }

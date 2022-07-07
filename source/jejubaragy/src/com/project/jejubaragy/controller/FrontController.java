@@ -28,6 +28,10 @@ import com.project.jejubaragy.service.MemberUpService;
 import com.project.jejubaragy.service.MyRouteListService;
 import com.project.jejubaragy.service.RouteContentService;
 import com.project.jejubaragy.service.RouteListService;
+import com.project.jejubaragy.service.RouteMakeService;
+import com.project.jejubaragy.service.DetailRouteMakeService;
+import com.project.jejubaragy.service.DetailRouteViewService;
+import com.project.jejubaragy.service.RouteMakeViewService;
 import com.project.jejubaragy.service.Service;
 import com.project.jejubaragy.service.SpotListService;
 import com.project.jejubaragy.service.BoardListService;
@@ -216,6 +220,16 @@ public class FrontController extends HttpServlet {
 			service = new RouteContentService();
 			service.execute(request, response);
 			viewPage = "route/routeContent.jsp";
+		}else if(command.equals("/routeMakeView.do")) {
+			viewPage = "route/routeMake.jsp";
+		}else if(command.equals("/routeMake.do")) {
+			service = new RouteMakeService();
+			service.execute(request, response);
+			viewPage = "route/detailRouteMake.jsp";
+		}else if(command.equals("/detailRouteMake.do")) {
+			service = new DetailRouteMakeService();
+			service.execute(request, response);
+			viewPage = "route/detailRouteMake.jsp";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

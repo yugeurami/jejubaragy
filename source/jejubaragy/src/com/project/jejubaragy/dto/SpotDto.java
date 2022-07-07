@@ -63,8 +63,7 @@ public class SpotDto {
 	}
 	@Override
 	public String toString() {
-		return "SpotDto [sid=" + sid + ", ccode=" + ccode + ", cname=" + cname + ", sname=" + sname + ", sphoto="
-				+ sphoto + ", saddress=" + saddress + ", description=" + description +  "]";
+		return "'"+saddress + "'";
 	}
 	
 	

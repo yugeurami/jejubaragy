@@ -121,7 +121,8 @@
 				        var imageSrc = '${conPath }/img/지도마커.png', // 마커이미지의 주소입니다    
   							imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
    							imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-   						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
+   						var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+   						var selecedMarkerImage = new kakao.maps.MarkerImage('${conPath }/img/선택된지도마커.png', imageSize, imageOption);
    							
 				        // 결과값으로 받은 위치를 마커로 표시합니다
    						var marker = new kakao.maps.Marker({
@@ -133,6 +134,7 @@
    						marker.setTitle('${spot.sid }');
 				
    					    kakao.maps.event.addListener(marker, 'click', function() {
+   					    	marker.setImage(selecedMarkerImage);
    					    	$('.detail').removeClass("selected");
    					    	var sid = this.getTitle();
    					    	console.log(sid);
