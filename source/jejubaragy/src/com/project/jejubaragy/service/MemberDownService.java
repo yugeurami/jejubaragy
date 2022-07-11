@@ -20,6 +20,7 @@ public class MemberDownService implements Service {
 			result = dao.memberDelete(dto.getMid());
 			System.out.println(result == MemberDao.SUCCESS ? dto.getMid()+"탈퇴 성공" : dto.getMid()+"탈퇴 실패");
 			if(result == MemberDao.SUCCESS) {
+				session.invalidate();
 				request.setAttribute("deleteResult", MemberDao.SUCCESS);
 			}else {
 				request.setAttribute("deleteResult", MemberDao.FAIL);

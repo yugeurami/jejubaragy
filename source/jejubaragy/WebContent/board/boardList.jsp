@@ -49,7 +49,7 @@
 									</div>
 								</div>
 							</td>
-						<c:if test="${cnt % 4 == 0 }">
+						<c:if test="${cnt % 5 == 0 }">
 							</tr>
 							<tr>
 						</c:if>

@@ -61,7 +61,7 @@
 	overflow : hidden;
 	background-color : #B4C6A6;
 	box-shadow: 8px 5px 5px grey;
-	border-radius : 20px 20px 20px 20px;
+	border-radius : 20px;
 }
 .main_wrap .wrap{
 	float : left;

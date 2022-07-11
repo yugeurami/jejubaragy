@@ -187,7 +187,7 @@ INSERT INTO BOARD(BNUM, MID, AID, BWRITER, RNUM, BTITLE, BCONTENT, BMAINPHOTO, B
 UPDATE BOARD SET BHIT = BHIT + 1 WHERE BNUM = 1;
 
 -- 게시글 자세히 보기
-SELECT * FROM BOARD WHERE BNUM = 1;
+SELECT * FROM BOARD WHERE BNUM = 3;
 
 -- 게시글 수정
 UPDATE BOARD
@@ -204,14 +204,6 @@ SELECT *
                                     FROM BOARD
                                     ORDER BY BHIT DESC) A )
     WHERE RN BETWEEN 1 AND 5;
-      
--- 여행지가 포함된 글 목록
-SELECT * 
-    FROM (  SELECT ROWNUM RN, A.*
-                    FROM (  SELECT * FROM BOARD
-                                    WHERE RNUM = ( SELECT RNUM FROM DETAILROUTE WHERE SID = '' )
-                                    ORDER BY BHIT DESC) A )
-    WHERE RN BETWEEN 1 AND 10;
     
 -- 게시글 삭제
 DELETE FROM BOARD WHERE BNUM = 1;
@@ -256,5 +248,8 @@ DELETE FROM COMMENTS
                   CSTEP<( SELECT NVL( MIN(CSTEP), 9999 ) 
                                 FROM COMMENTS 
                                 WHERE CGROUP = 1 AND CSTEP > 1 AND CINDENT <= 1) );
+
+-- 보드 삭제시 댓글 삭제
+DELETE FROM COMMENTS WHERE BNUM = 1;
                                 
                                 

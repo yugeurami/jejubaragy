@@ -15,7 +15,7 @@ public class BoardListService implements Service {
 			pageNum = "1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
-		final int PAGESIZE = 12;
+		final int PAGESIZE = 10;
 		final int BLOCKSIZE = 10;
 		int startRow = (currentPage - 1) * PAGESIZE + 1; 
 		int endRow = startRow + PAGESIZE - 1;

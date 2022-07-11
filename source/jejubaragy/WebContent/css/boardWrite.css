@@ -9,6 +9,7 @@
 	right : 100px;
 }
 #main .main_wrap{
+	width : 100%;
 	overflow : hidden;
 	background-color : #B4C6A6;
 	box-shadow: 8px 5px 5px grey;
@@ -50,10 +51,10 @@
 	border : 1px solid #B4C6A6;
 	outline-color: #B4C6A6;
 }
-#join table tr td #summernote{
-	width : 100%;
+#join table tr th #summernote{
+	width : 1000px;
 	height : 600px;
-	margin : 20px auto;
+	text-align: left;
 }
 #join table .button{
 	text-align: center;

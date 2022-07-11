@@ -5,66 +5,155 @@
 #main{
 	width : 70%;
 	position : absolute;
-	top : 80px;
+	top : 90px;
 	right : 100px;
 }
+#main .search{
+	height : 55px;
+}
+#main .search #memberStatus{
+	overflow : hidden;	
+	margin : 0;
+}
+#main .search #memberStatus li{
+	width : 15%;
+	float : left;
+	list-style : none;
+	display : block;
+	text-align:center;
+	border-bottom : none;
+	border-radius : 20px 20px 0 0;
+	border-color : #66806A;
+	font-size : 1.1em;
+	font-weight : 300;
+	margin-top : 15px;
+	line-height : 45px;
+	background-color : #66806A;
+	color : white;
+}
+#main .search #memberStatus #selected{
+	height : 50px;
+	color : #66806A;
+	display : block;
+	text-align : center;
+	margin-top : 10px;
+	font-weight : 400;
+	font-size : 1.15em;
+	border-color : #B4C6A6;
+	background-color : #B4C6A6;
+	box-shadow: 8px -3px 8px grey;
+}
+#main #code #memberStatus li:hover{
+	height : 50px;
+	color : #66806A;
+	display : block;
+	cursor: pointer;
+	margin-top : 10px;
+	font-weight : 400;
+	font-size : 1.15em;
+	border-color : #B4C6A6;
+	background-color : #B4C6A6;
+	box-shadow: 8px -3px 10px grey;
+}
 #main #main_wrap{
+	height : 830px;
 	overflow: hidden;
 	text-align: center;
 	border-radius : 20px;
 	background-color: #B4C6A6;
 	box-shadow: 8px 5px 5px grey;
 }
-#main #main_wrap .title{
-	margin : 20px;
-	color : white;
-	font-size : 45px;
-	font-weight: 700;
-	display: block;
-}
-#main #main_wrap #route_scroll{
-	width : 80%;
-	height : 800px;
+#main #main_wrap .search{
+	width : 70%;
 	margin : 20px auto;
-	overflow : scroll;
-	overflow-x : hidden;
-	border-radius : 20px;
+}
+#main #main_wrap .search table tr{
+	width : 100%;
+}
+#main #main_wrap .search table tr .select_box{
+	width : 15%;
+}
+#main #main_wrap .search table tr .select_box select{
+	height : 40px;
+	width : 150px;
+	outline : none;
+	font-size: 17px;
+	text-align : center;
+	border-radius: 10px;
+	background-color: #FFF1AF;
+	border : 1px solid #B4C6A6;
+}
+#main #main_wrap .search table tr .search_text{
+	width : 75%;
+}
+#main #main_wrap .search table tr .search_text input{
+	width : 100%;
+	height : 38px;
+	outline : none;
+	border-radius: 10px;
+	border : 1px solid #B4C6A6;
+}
+#main #main_wrap .search table tr .btn{
+	width : 60%;
+	padding : 0;
+	padding-left : 5px;
+}
+#main #main_wrap .search table tr .btn input{
+	color : white;
+	width : 99%;
+	height : 43px;
+	outline : none;
+	text-align : center;
+	border-radius: 10px;
+	background-color: #66806A;
+	border : 1px solid #B4C6A6;
+}
+
+#main #main_wrap .list{
+	position : relative;
+	width : 70%;
+	height : 80%;
+	margin : 0 auto;
+}
+#main #main_wrap .list table{
+	width : 100%;
 	background-color : white;
 }
-#main #main_wrap #route_scroll::-webkit-scrollbar{
-	width : 15px;
-}
-#main #main_wrap #route_scroll::-webkit-scrollbar-thumb{
-	border-radius : 0 20px 20px 0;
-	background-color : #FFF1AF;
-}
-#main #main_wrap #route_scroll::-webkit-scrollbar-track{
-	background-color : #66806A;
-	border-radius : 0 20px 20px 0;
-}
-#main #main_wrap #route_scroll .one_route{
-	width : 90%;
-	height : 100px;
-	margin : 10px auto;
-	background-color: #B4C6A6;
-	border-radius : 20px;
-	padding-top: 15px;
-}
-#main #main_wrap #route_scroll .one_route .rname{
-	color : #FFF1AF;
-	font-size: 25px;
+#main #main_wrap .list table caption{
+	padding : 10px;
+	font-size: 30px;
 	font-weight: 700;
 }
-#main #main_wrap #route_scroll .one_route .mname{
-	color : white;
+#main #main_wrap .list table tr{
+	width: 100%;
+	text-align: center;
+	background-color : #B4C6A6;
+}
+#main #main_wrap .list table tr .check{
+	width : 10%;
 	font-size: 20px;
-	font-weight: 500;
+	font-weight: 700; 
 }
-#main #main_wrap #route_scroll .one_route .date{
+#main #main_wrap .list table tr th{
+	width : 30%;
+	font-size: 20px;
+	font-weight: 700; 
+}
+#main #main_wrap .list table tr td{
+	width : 30%;
+}
+#main #main_wrap .reg{
+	margin : 20px;
+}
+#main #main_wrap .reg .join{
+	width : 200px;
+	height : 50px;
 	color : white;
+	cursor : pointer;
 	font-size: 18px;
-	font-weight: 500;
-}
-#main #main_wrap #route_scroll .one_route:hover {
-	background-color : #66806A;
+	font-weight: 500; 
+	border-radius : 20px;
+	background-color: #66806A;
+	border : 1px solid #66806A;
+	
 }

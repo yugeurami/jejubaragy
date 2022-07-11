@@ -87,14 +87,13 @@ public class BoardDao {
 				String mid = rs.getString("mid");
 				String aid = rs.getString("aid");
 				String bwriter = rs.getString("bwriter");
-				int rnum = rs.getInt("rnum");
 				String btitle = rs.getString("btitle");
 				String bcontent = rs.getString("bcontent");
 				String bmainphoto = rs.getString("bmainphoto");
 				int bhit = rs.getInt("bhit");
 				String bip = rs.getString("bip");
 				Date brdate = rs.getDate("brdate");
-				boardlist.add(new BoardDto(bnum, mid, aid, bwriter, rnum, btitle, bcontent, bmainphoto, bhit, bip, brdate));
+				boardlist.add(new BoardDto(bnum, mid, aid, bwriter, btitle, bcontent, bmainphoto, bhit, bip, brdate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -134,14 +133,13 @@ public class BoardDao {
 				String mid = rs.getString("mid");
 				String aid = rs.getString("aid");
 				String bwriter = rs.getString("bwriter");
-				int rnum = rs.getInt("rnum");
 				String btitle = rs.getString("btitle");
 				String bcontent = rs.getString("bcontent");
 				String bmainphoto = rs.getString("bmainphoto");
 				int bhit = rs.getInt("bhit");
 				String bip = rs.getString("bip");
 				Date brdate = rs.getDate("brdate");
-				boardlist.add(new BoardDto(bnum, mid, aid, bwriter, rnum, btitle, bcontent, bmainphoto, bhit, bip, brdate));
+				boardlist.add(new BoardDto(bnum, mid, aid, bwriter, btitle, bcontent, bmainphoto, bhit, bip, brdate));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -160,8 +158,9 @@ public class BoardDao {
 	public ArrayList<BoardDto> boardBestList() {
 		ArrayList<BoardDto> boardlist = new ArrayList<BoardDto>(); 
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
 		ResultSet rs = null;
+		System.out.println(1);
 		String sql = "SELECT *" + 
 				"    FROM (  SELECT ROWNUM RN, A.*" + 
 				"                    FROM (  SELECT *" + 
@@ -170,28 +169,40 @@ public class BoardDao {
 				"    WHERE RN BETWEEN 1 AND 5";
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
+				System.out.println(3);
 				int bnum = rs.getInt("bnum");
+				System.out.println(bnum);
 				String mid = rs.getString("mid");
+				System.out.println(mid);
 				String aid = rs.getString("aid");
+				System.out.println(aid);
 				String bwriter = rs.getString("bwriter");
-				int rnum = rs.getInt("rnum");
+				System.out.println(bwriter);
 				String btitle = rs.getString("btitle");
+				System.out.println(btitle);
 				String bcontent = rs.getString("bcontent");
+				System.out.println(bcontent);
 				String bmainphoto = rs.getString("bmainphoto");
+				System.out.println(bmainphoto);
 				int bhit = rs.getInt("bhit");
+				System.out.println(bhit);
 				String bip = rs.getString("bip");
+				System.out.println(bip);
 				Date brdate = rs.getDate("brdate");
-				boardlist.add(new BoardDto(bnum, mid, aid, bwriter, rnum, btitle, bcontent, bmainphoto, bhit, bip, brdate));
+				System.out.println(brdate);
+				System.out.println(4);
+				boardlist.add(new BoardDto(bnum, mid, aid, bwriter, btitle, bcontent, bmainphoto, bhit, bip, brdate));
+				System.out.println(5);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
 			try {
 				if(rs!=null) rs.close();
-				if(pstmt!=null) pstmt.close();
+				if(stmt!=null) stmt.close();
 				if(conn!=null) conn.close();
 			} catch (Exception e2) {
 				System.out.println(e2.getMessage());
@@ -205,19 +216,18 @@ public class BoardDao {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO BOARD(BNUM, MID, AID, BWRITER, RNUM, BTITLE, BCONTENT, BMAINPHOTO, BHIT, BIP, BRDATE)" + 
-				"                VALUES(BOARD_SEQ.NEXTVAL, ? , ?, ?, ?, ?, ?, ?, 0, ?, SYSDATE)";
+		String sql = "INSERT INTO BOARD(BNUM, MID, AID, BWRITER, BTITLE, BCONTENT, BMAINPHOTO, BHIT, BIP, BRDATE)" + 
+				"                VALUES(BOARD_SEQ.NEXTVAL, ? , ?, ?, ?, ?, ?, 0, ?, SYSDATE)";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getMid());
 			pstmt.setString(2, dto.getAid());
 			pstmt.setString(3, dto.getBwriter());
-			pstmt.setInt(4, dto.getRnum());
-			pstmt.setString(5, dto.getBtitle());
-			pstmt.setString(6, dto.getBcontent());
-			pstmt.setString(7, dto.getBmainphoto());
-			pstmt.setString(8, dto.getBip());
+			pstmt.setString(4, dto.getBtitle());
+			pstmt.setString(5, dto.getBcontent());
+			pstmt.setString(6, dto.getBmainphoto());
+			pstmt.setString(7, dto.getBip());
 			System.out.println(dto);
 			result = pstmt.executeUpdate();
 			System.out.println(result);
@@ -272,14 +282,13 @@ public class BoardDao {
 				String mid = rs.getString("mid");
 				String aid = rs.getString("aid");
 				String bwriter = rs.getString("bwriter");
-				int rnum = rs.getInt("rnum");
 				String btitle = rs.getString("btitle");
 				String bcontent = rs.getString("bcontent");
 				String bmainphoto = rs.getString("bmainphoto");
 				int bhit = rs.getInt("bhit");
 				String bip = rs.getString("bip");
 				Date brdate = rs.getDate("brdate");
-				board = new BoardDto(bnum, mid, aid, bwriter, rnum, btitle, bcontent, bmainphoto, bhit, bip, brdate);
+				board = new BoardDto(bnum, mid, aid, bwriter, btitle, bcontent, bmainphoto, bhit, bip, brdate);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -296,13 +305,12 @@ public class BoardDao {
 	}
 	
 	// 게시글 수정
-	public int boardModify(String btitle, int rnum, String bcontent, String bmainphoto, int bnum ) {
+	public int boardModify(String btitle, String bcontent, String bmainphoto, int bnum ) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE BOARD" + 
 				"    	SET BTITLE = ?," + 
-				"			 RNUM = ?," +
 				"          BCONTENT = ?," + 
 				"          BMAINPHOTO = ?" + 
 				"   	WHERE BNUM = ?";

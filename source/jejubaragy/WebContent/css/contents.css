@@ -49,7 +49,7 @@
 	padding-bottom: 20px;
 }
 #main #content .content td{
-	height : 600px;
+	height : 500px;
 	font-size: 18px;
 	font-weight: 300;
 	background-color : white;
@@ -198,7 +198,7 @@
 #main #commentsList .write textarea{
 	float : left;
 	width : 80%;
-	height : 50px;
+	height : 60px;
 	background-color: #66806A;
 	border : none;
 	outline-color: #B4C6A6;
@@ -207,7 +207,7 @@
 #main #commentsList .write input[type='submit']{
 	float : left;
 	width : 16%;
-	height : 56.22px;
+	height : 63px;
 	margin-left : 10px;
 	background-color: #66806A;
 	color: white;

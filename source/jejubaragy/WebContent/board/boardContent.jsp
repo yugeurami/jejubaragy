@@ -77,9 +77,6 @@
 				<tr class="small brdate">
 					<td>DATE | ${boardContent.brdate }</td>
 				</tr>
-				<tr class="mid">
-					<td>${boardContent.bwriter }</td>
-				</tr>
 				<tr class="content">
 					<td>${boardContent.bcontent }</td>
 				</tr>

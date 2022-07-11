@@ -1,0 +1,58 @@
+@charset "UTF-8";
+*{
+	font-family: 'Noto Sans KR', sans-serif;	
+}
+#main{
+	width : 70%;
+	position : absolute;
+	top : 100px;
+	right : 100px;
+}
+#main #main_wrap{
+	overflow: hidden;
+	text-align: center;
+	border-radius : 20px;
+	background-color: #B4C6A6;
+	box-shadow: 8px 5px 5px grey;
+}
+#main #main_wrap .list{
+	width : 80%;
+	margin : 50px auto;
+}
+#main #main_wrap .list table{
+	width : 100%;
+	background-color : white;
+}
+#main #main_wrap .list table caption{
+	padding : 10px;
+	font-size: 30px;
+	font-weight: 700;
+}
+#main #main_wrap .list table tr{
+	width: 100%;
+	text-align: center;
+	background-color : #B4C6A6;
+}
+#main #main_wrap .list table tr th{
+	width : 25%;
+	font-size: 20px;
+	font-weight: 700; 
+}
+#main #main_wrap .list table tr td{
+	width : 25%;
+}
+#main #main_wrap .reg{
+	margin : 20px;
+}
+#main #main_wrap .reg .join{
+	width : 200px;
+	height : 50px;
+	color : white;
+	cursor : pointer;
+	font-size: 18px;
+	font-weight: 500; 
+	border-radius : 20px;
+	background-color: #66806A;
+	border : 1px solid #66806A;
+	
+}

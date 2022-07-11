@@ -14,12 +14,14 @@ public class BoardContentService implements Service {
 		BoardDao bdao = BoardDao.getInstance();
 		CommentsDao cdao = CommentsDao.getInstance();
 		String bnumStr = request.getParameter("bnum");
+		System.out.println("넘어오냐?"+bnumStr);
 		int bnum;
 		if(bnumStr!=null) {
 			bnum = Integer.parseInt(bnumStr);
 		}else {
 			HttpSession session = request.getSession();
 			bnum = (Integer)session.getAttribute("bnum");
+			System.out.println("넘어오냐??"+bnum);
 			session.removeAttribute("bnum");
 		}
 		String pageNum = request.getParameter("pageNum");

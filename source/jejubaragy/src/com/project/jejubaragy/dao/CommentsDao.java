@@ -301,4 +301,27 @@ public class CommentsDao {
 		}
 		return result;
 	}
+	// 게시글 삭제시 댓글 삭제
+	public int boardDelete(int bnum) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM COMMENTS WHERE BNUM = ? ";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bnum);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			} catch (Exception e2) {
+				System.out.println(e2.getMessage());
+			}
+		}
+		return result;
+	}
 }

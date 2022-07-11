@@ -28,29 +28,28 @@ public class BoardModifyService implements Service {
 		int maxSize = 1024*1024*10; 
 		MultipartRequest mRequest = null;
 		String bmainphoto = ""; 
+		String bfile = "";
+		String bcontent = null;
+		String oldbcontent = null;
 		try {
 			mRequest = new MultipartRequest(request, path, maxSize, "utf-8", new DefaultFileRenamePolicy());			
 			Enumeration<String> params = mRequest.getFileNames(); 
-			String param = params.nextElement(); 
-			bmainphoto = mRequest.getFilesystemName(param);
+			while (params.hasMoreElements()) {
+				String param = (String) params.nextElement();
+				bfile = mRequest.getFilesystemName(param);
+				bmainphoto = mRequest.getFilesystemName(param);
+				System.out.println("첨부파일 넘어온 파라미터 이름"+param+" / 첨부파일이름 : "+bfile);
+			}
 			
 			int bnum = Integer.parseInt(request.getParameter("bnum"));
 			HttpSession session = request.getSession();
 			String btitle = mRequest.getParameter("btitle");
-			String rnumStr = mRequest.getParameter("rnum");
-			int rnum = 0;
-			if(rnumStr != "" || rnumStr != null) {
-				rnum = Integer.parseInt(rnumStr);
-			}
-			String bcontent = request.getParameter("bcontent");
-			String oldmainphoto = request.getParameter("oldmainphoto");
-			if(bmainphoto == null || bmainphoto == "") {
-				bmainphoto = oldmainphoto;
-			}
-			
+			bcontent = mRequest.getParameter("bcontent");
+			oldbcontent = mRequest.getParameter("oldbcontent");
 			BoardDao dao = BoardDao.getInstance();
-			int result = dao.boardModify(btitle, rnum, bcontent, bmainphoto, bnum);
+			int result = dao.boardModify(btitle, bcontent, bmainphoto, bnum);
 			if(result == BoardDao.SUCCESS) {
+				request.setAttribute("bnum", bnum);
 				request.setAttribute("boardModifyResult", MemberDao.SUCCESS);
 			} else {
 				request.setAttribute("boardModifyResult", MemberDao.FAIL);
@@ -59,7 +58,7 @@ public class BoardModifyService implements Service {
 			System.out.println(e.getMessage());
 		}
 		File serverFile = new File(path + "/" + bmainphoto);
-		if(bmainphoto != null || bmainphoto != "") {
+		if(bcontent != null && !bcontent.equals(oldbcontent)) {
 			InputStream is = null;
 			OutputStream os = null;
 			try {

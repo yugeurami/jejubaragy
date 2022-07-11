@@ -16,6 +16,14 @@ import com.project.jejubaragy.service.AdminLoginService;
 import com.project.jejubaragy.service.BoardBestListService;
 import com.project.jejubaragy.service.BoardContentService;
 import com.project.jejubaragy.service.BoardDeleteService;
+import com.project.jejubaragy.service.BoardListService;
+import com.project.jejubaragy.service.BoardModifyService;
+import com.project.jejubaragy.service.BoardWriteService;
+import com.project.jejubaragy.service.CommentsGetService;
+import com.project.jejubaragy.service.CommentsModifyService;
+import com.project.jejubaragy.service.CommentsReplyService;
+import com.project.jejubaragy.service.CommnetsWriteService;
+import com.project.jejubaragy.service.DetailRouteMakeService;
 import com.project.jejubaragy.service.LogoutService;
 import com.project.jejubaragy.service.MemberDownListService;
 import com.project.jejubaragy.service.MemberDownService;
@@ -29,18 +37,8 @@ import com.project.jejubaragy.service.MyRouteListService;
 import com.project.jejubaragy.service.RouteContentService;
 import com.project.jejubaragy.service.RouteListService;
 import com.project.jejubaragy.service.RouteMakeService;
-import com.project.jejubaragy.service.DetailRouteMakeService;
-import com.project.jejubaragy.service.DetailRouteViewService;
-import com.project.jejubaragy.service.RouteMakeViewService;
 import com.project.jejubaragy.service.Service;
 import com.project.jejubaragy.service.SpotListService;
-import com.project.jejubaragy.service.BoardListService;
-import com.project.jejubaragy.service.BoardModifyService;
-import com.project.jejubaragy.service.BoardWriteService;
-import com.project.jejubaragy.service.CommentsGetService;
-import com.project.jejubaragy.service.CommentsModifyService;
-import com.project.jejubaragy.service.CommentsReplyService;
-import com.project.jejubaragy.service.CommnetsWriteService;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -187,7 +185,7 @@ public class FrontController extends HttpServlet {
 		}else if(command.equals("/boardDelete.do")) {
 			service = new BoardDeleteService();
 			service.execute(request, response);
-			viewPage = "boardContent.do";
+			viewPage = "boardList.do";
 		}else if(command.equals("/commentsModifyView.do")) {
 			service = new CommentsGetService();
 			service.execute(request, response);

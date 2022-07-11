@@ -49,12 +49,12 @@
 					<li><a href="${conPath }/adminList.do">ADMIN LIST</a></li>						
 					<li><a href="${conPath }/memberList.do">MEMBER LIST</a></li>
 				</c:if>
-				<c:if test="${empty admin }">
+				<%-- <c:if test="${empty admin }">
 					<li><a href="${conPath }/routeMakeView.do">PLANING</a></li>
 					<li><a href="${conPath }/myRouteList.do">MY TRAVLE</a></li>
-				</c:if>
+				</c:if> --%>
 				<li><a href="${conPath }/spotList.do">TRAVEL SPOT</a></li>
-				<li><a href="${conPath }/routeList.do">TRAVEL ROUTE</a></li>
+				<%-- <li><a href="${conPath }/routeList.do">TRAVEL ROUTE</a></li> --%>
 				<li><a href="${conPath }/boardList.do">BOARD</a></li>
 			</ul>
 		</div>

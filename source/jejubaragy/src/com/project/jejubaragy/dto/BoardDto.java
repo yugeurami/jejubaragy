@@ -7,7 +7,6 @@ public class BoardDto {
 	private String mid;
 	private String aid;
 	private String bwriter;
-	private int rnum;
 	private String btitle;
 	private String bcontent;
 	private String bmainphoto;
@@ -15,13 +14,12 @@ public class BoardDto {
 	private String bip;
 	private Date brdate;
 	
-	public BoardDto(int bnum, String mid, String aid, String bwriter, int rnum, String btitle, String bcontent,
+	public BoardDto(int bnum, String mid, String aid, String bwriter, String btitle, String bcontent,
 			String bmainphoto, int bhit, String bip, Date brdate) {
 		this.bnum = bnum;
 		this.mid = mid;
 		this.aid = aid;
 		this.bwriter = bwriter;
-		this.rnum = rnum;
 		this.btitle = btitle;
 		this.bcontent = bcontent;
 		this.bmainphoto = bmainphoto;
@@ -60,14 +58,6 @@ public class BoardDto {
 
 	public void setBwriter(String bwriter) {
 		this.bwriter = bwriter;
-	}
-
-	public int getRnum() {
-		return rnum;
-	}
-
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
 	}
 
 	public String getBtitle() {
@@ -120,8 +110,7 @@ public class BoardDto {
 
 	@Override
 	public String toString() {
-		return "BoardDto [bnum=" + bnum + ", mid=" + mid + ", aid=" + aid + ", bwriter=" + bwriter + ", rnum=" + rnum
-				+ ", btitle=" + btitle + ", bcontent=" + bcontent + ", bmainphoto=" + bmainphoto + ", bhit=" + bhit
+		return "BoardDto [bnum=" + bnum + ", mid=" + mid + ", aid=" + aid + ", bwriter=" + bwriter + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bmainphoto=" + bmainphoto + ", bhit=" + bhit
 				+ ", bip=" + bip + ", brdate=" + brdate + "]";
 	}
 	

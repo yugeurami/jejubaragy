@@ -67,11 +67,12 @@ header #top_nav .right li a{
 /* 메뉴 목록 */
 header #bottom_nav{
 	width : 100%;
+	overflow: hidden;
 }
 header #bottom_nav ul{
 	width : 80%;
-	text-align : right;
-	margin-right : 50px;
+	float : right;
+	margin-right : 45px;
 }
 header #bottom_nav ul li a{
 	width : 100%;
