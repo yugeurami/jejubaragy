@@ -1,5 +1,4 @@
 # 여행지 검색 및 여행게시판
-=====================
 > 개인 프로젝트
 
 - 프로젝트 명 : 제주바라기 <br>
@@ -24,7 +23,6 @@
 ### 기능정의서
 ![슬라이드15](https://user-images.githubusercontent.com/101315970/178389982-579b9769-2818-4009-bbf3-4b56f1b60842.PNG)
 <br>
-=====================
 ## 실행화면
 ![슬라이드18](https://user-images.githubusercontent.com/101315970/178390002-ff18de49-7c1f-4eb4-866b-6f3105f6b49d.PNG)
 ![슬라이드25](https://user-images.githubusercontent.com/101315970/178390063-bf770500-f691-4295-b674-0913caa44822.PNG)
