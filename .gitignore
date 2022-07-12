@@ -1,2 +1,4 @@
-/.metadata
-/.metadata/
+/build/
+/.settings/
+/.classpath
+/.project
